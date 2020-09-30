@@ -4,7 +4,9 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
+
 import { HomePageRoutingModule } from './home-routing.module';
+import { BotonesComponent } from '../componentes/botones/botones.component';
 
 
 @NgModule({
@@ -13,6 +15,7 @@ import { HomePageRoutingModule } from './home-routing.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule
+    
   ],
   declarations: [HomePage]
 })
