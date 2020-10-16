@@ -1,4 +1,6 @@
+import { not } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
+import { NewsService } from '../../services/noticias.service';
 
 @Component({
   selector: 'app-noticias',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NoticiasComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _noticiasService:NewsService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    const noticias = await this._noticiasService.getNoticias();
+    console.log(noticias);
   }
 
 }

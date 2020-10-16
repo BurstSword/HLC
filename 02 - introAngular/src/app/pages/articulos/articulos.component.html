@@ -1,12 +1,31 @@
 <p>Pagina de articulos</p>
+
+<table>
+
+    <tr>
+
+        <th *ngFor="let column of headers">
+            {{column}}
+
+        </th>
+    </tr>
+
+    <tr *ngFor="let row of articulos">
+
+        <td>{{row.nombre}}</td>
+        <td>{{row.talla}}</td>
+        <td>{{row.precio}}</td>
+    </tr>
+
+</table>
 <ul>
     <li *ngFor="let articulo of articulos">
         {{articulo.nombre}}
         {{articulo.talla}}
-        <p *ngIf="oculto">{{articulo.precio}}  </p>       
+        <p *ngIf="oculto">{{articulo.precio}} </p>
     </li>
-    
-    
-    <button *ngIf="!oculto"  (click)="oculto=true">Mostrar Precio</button>
-    <button *ngIf="oculto"  (click)="oculto=false">Ocultar Precio</button>
+
+
+    <button *ngIf="!oculto" (click)="oculto=true">Mostrar Precio</button>
+    <button *ngIf="oculto" (click)="oculto=false">Ocultar Precio</button>
 </ul>

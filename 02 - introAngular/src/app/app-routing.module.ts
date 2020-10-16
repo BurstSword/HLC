@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { SugerenciasComponent } from './pages/sugerencias/sugerencias.component';
-import { NoticiasComponent } from './pages/noticias/noticias.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ArticulosComponent } from './pages/articulos/articulos.component';
+import {HttpClientModule} from '@angular/common/http'
 
 const routes: Routes=[
 
@@ -16,7 +16,7 @@ const routes: Routes=[
   },
   {
     path:'noticias',
-    component: NoticiasComponent
+    loadChildren:()=>import('./pages/noticias/noticias.module').then(miModulo=>miModulo.NoticiasModule)
   },
   {
     path:'sugerencias',
