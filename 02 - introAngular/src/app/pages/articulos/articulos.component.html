@@ -1,31 +1,19 @@
 <p>Pagina de articulos</p>
 
-<table>
+<div class="container-fluide">
+<div class="row">
+    <div class="card" *ngFor="let articulo of articulos; index as i;">
+<div class="card-body bg-dark">
+<h4 class="card-title text-light">{{articulo.nombre}}</h4>
+<p class="card-title text-light">Talla: {{articulo.talla}}</p>
+<button (click)="articulo.oculto = !articulo.oculto" class="btn btn-light">{{articulo.oculto ? "Ocultar Precio" : "Mostrar Precio"}} </button>
+<span class="card-text text-light ml-3 " *ngIf="articulo.oculto">{{articulo.precio}}</span>
+</div>
 
-    <tr>
-
-        <th *ngFor="let column of headers">
-            {{column}}
-
-        </th>
-    </tr>
-
-    <tr *ngFor="let row of articulos">
-
-        <td>{{row.nombre}}</td>
-        <td>{{row.talla}}</td>
-        <td>{{row.precio}}</td>
-    </tr>
-
-</table>
-<ul>
-    <li *ngFor="let articulo of articulos">
-        {{articulo.nombre}}
-        {{articulo.talla}}
-        <p *ngIf="oculto">{{articulo.precio}} </p>
-    </li>
+    </div>
+</div>
 
 
-    <button *ngIf="!oculto" (click)="oculto=true">Mostrar Precio</button>
-    <button *ngIf="oculto" (click)="oculto=false">Ocultar Precio</button>
-</ul>
+
+
+</div>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { InicioComponent } from './inicio/inicio.component';
 import { SugerenciasComponent } from './sugerencias/sugerencias.component';
 import { ArticulosComponent } from './articulos/articulos.component';
+import { ErrorComponent } from './error/error.component';
 
 
 
@@ -11,6 +12,7 @@ import { ArticulosComponent } from './articulos/articulos.component';
     InicioComponent,
     SugerenciasComponent,
     ArticulosComponent,
+    ErrorComponent,
   ],
   imports: [
     CommonModule

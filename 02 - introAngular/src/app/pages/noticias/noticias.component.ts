@@ -1,5 +1,6 @@
-import { not } from '@angular/compiler/src/output/output_ast';
+
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NewsService } from '../../services/noticias.service';
 
 @Component({
@@ -9,11 +10,19 @@ import { NewsService } from '../../services/noticias.service';
 })
 export class NoticiasComponent implements OnInit {
 
-  constructor(private _noticiasService:NewsService) { }
-
+  
+  constructor(private _noticiasService:NewsService, private router:Router) { }
+  public articulos: Article []=[];
   async ngOnInit() {
+    
     const noticias = await this._noticiasService.getNoticias();
-    console.log(noticias);
+    if(noticias.status=="ok"){
+      this.articulos=noticias.articles;
+      
+    }else{
+      this.router.navigate(['/error']);
+    }
+    
   }
 
 }

@@ -5,7 +5,8 @@ import { InicioComponent } from './pages/inicio/inicio.component';
 import { SugerenciasComponent } from './pages/sugerencias/sugerencias.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ArticulosComponent } from './pages/articulos/articulos.component';
-import {HttpClientModule} from '@angular/common/http'
+import { ErrorComponent } from './pages/error/error.component';
+
 
 const routes: Routes=[
 
@@ -29,6 +30,10 @@ const routes: Routes=[
   {
     path:'articulos',
     component: ArticulosComponent
+  },
+  {
+    path:'error',
+    component: ErrorComponent
   },
   {
     path:'**',

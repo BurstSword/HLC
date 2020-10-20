@@ -17,16 +17,19 @@ export class ArticulosComponent implements OnInit {
       nombre: 'Camiseta',
       talla: 'XL',
       precio: 35.99,
+      oculto: false,
     },
     {
       nombre: 'Jersey',
       talla: 'XL',
       precio: 32.99,
+      oculto: false,
     },
     {
       nombre: 'Pantalon',
       talla: 'XL',
       precio: 999.99,
+      oculto: false,
     },
 
   ]

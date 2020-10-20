@@ -1,1 +1,4 @@
-<p>noticias works!</p>
+<div class="card mb-3" *ngFor="let articulo of articulos; index as i" style="max-width: 540px;">
+   <img src="{{articulo.urlToImage}}" class="card-img" *ngIf="articulo.urlToImage">
+   <img src="../../../assets/NoImageLarge.png" class="card-img" *ngIf="articulo.urlToImage">
+  </div>
