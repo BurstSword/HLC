@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NewsService } from '../../services/noticias.service';
+import { Article } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-noticias',
@@ -12,12 +13,12 @@ export class NoticiasComponent implements OnInit {
 
   
   constructor(private _noticiasService:NewsService, private router:Router) { }
-  public articulos: Article []=[];
+  public articulos: Article[];
   async ngOnInit() {
     
-    const noticias = await this._noticiasService.getNoticias();
-    if(noticias.status=="ok"){
-      this.articulos=noticias.articles;
+    const datos = await this._noticiasService.getNoticias();
+    if(datos.status=="ok"){
+      this.articulos=datos.articles;
       
     }else{
       this.router.navigate(['/error']);

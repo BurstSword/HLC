@@ -1,10 +1,10 @@
-interface RespuestaNoticias {
+ export interface RespuestaNoticias {
     status: string;
     totalResults: number;
     articles: Article[];
   }
   
-  interface Article {
+  export interface Article {
     source: Source;
     author?: string;
     title: string;
@@ -15,7 +15,7 @@ interface RespuestaNoticias {
     content: string;
   }
   
-  interface Source {
+  export interface Source {
     id?: string;
     name: string;
   }

@@ -10,7 +10,7 @@ export class ArticulosComponent implements OnInit {
   constructor() { }
   public oculto: boolean = false;
   
-  headers=["Articulo","Talla", "Precio"]
+  headers=["Articulo","Talla", "Precio"];
 
   public articulos: any = [
     {
