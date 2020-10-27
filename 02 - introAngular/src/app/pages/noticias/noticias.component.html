@@ -28,7 +28,7 @@
          <div class="card-footer bg-transparent" *ngIf="!articulo.source.name">Fuente anónima</div>
 
          <p class="card-text mb-2 d-flex justify-content-end">
-            <small class="text-muted" *ngIf="articulo.publishedAt">Publicado el {{articulo.publishedAt}}</small>
+            <small class="text-muted" *ngIf="articulo.publishedAt">Publicado el {{articulo.publishedAt|fecha}}</small>
             <small class="text-muted" *ngIf="!articulo.publishedAt">Fecha desconocida</small>
          </p>
 

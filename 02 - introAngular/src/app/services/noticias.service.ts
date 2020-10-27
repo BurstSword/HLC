@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment';
 
  import { RespuestaNoticias } from '../interfaces/interfaces';
 
@@ -12,7 +13,7 @@ export class NewsService {
 
 getNoticias(){
   return new Promise<RespuestaNoticias>(resolve=>{
-    this._http.get<RespuestaNoticias>("http://newsapi.org/v2/everything?q=bitcoin&from=2020-09-20&sortBy=publishedAt&apiKey=de0bac749b8d47bfae5499bda3aa9518").subscribe(resp=>{
+    this._http.get<RespuestaNoticias>(`${environment.apiUrl}top-headlines?country=us&apiKey=${environment.apiKey}`).subscribe(resp=>{
       resolve(resp);
     });
   });
