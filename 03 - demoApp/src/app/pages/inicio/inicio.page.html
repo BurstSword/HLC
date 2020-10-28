@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  
+ <!--
 <ion-button 
 [routerLink]="'/action-sheet'"
  expand="block"
@@ -16,8 +16,14 @@
 <ion-button 
 [routerLink]="'/alert'" 
 expand="block" 
-color="dark">
+color="tertiary">
   Alert
 </ion-button>
+-->
 
+<ion-list *ngFor="let componente of componentes, index as i">
+  <ion-item detail>
+    <ion-button routerLink={{componente.path}} expand="block">{{componente.name}}</ion-button>
+  </ion-item>
+</ion-list>
 </ion-content>

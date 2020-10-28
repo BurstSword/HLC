@@ -6,10 +6,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inicio.page.scss'],
 })
 export class InicioPage implements OnInit {
-
-  constructor() { }
+   componentes: any = [
+    {
+      path: "/action-sheet",
+      name: "Action-sheet"
+    },
+    {
+      path: "/alert",
+      name: "Alert"
+    }
+    
+  ]
+  constructor() {
+    
+  }
 
   ngOnInit() {
+    
   }
 
 }
