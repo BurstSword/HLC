@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Componente } from 'src/app/interfaces/interfaces';
 
 @Component({
   selector: 'app-inicio',
@@ -6,23 +7,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inicio.page.scss'],
 })
 export class InicioPage implements OnInit {
-   componentes: any = [
+  componentes: Componente[] = [
     {
-      path: "/action-sheet",
-      name: "Action-sheet"
+      nombre: "Action-sheet",
+      ruta: "/action-sheet",
+      icono: "trash",
+      color: "primary"
     },
     {
-      path: "/alert",
-      name: "Alert"
+      nombre: "Alert",
+      ruta: "/alert",
+      icono: "add",
+      color: "primary"
     }
-    
+
   ]
   constructor() {
-    
+
   }
 
   ngOnInit() {
-    
+
   }
 
 }

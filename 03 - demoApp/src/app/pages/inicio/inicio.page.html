@@ -5,25 +5,14 @@
 </ion-header>
 
 <ion-content>
- <!--
-<ion-button 
-[routerLink]="'/action-sheet'"
- expand="block"
-  color="primary">
-  Action-sheet
-</ion-button>
 
-<ion-button 
-[routerLink]="'/alert'" 
-expand="block" 
-color="tertiary">
-  Alert
-</ion-button>
--->
 
-<ion-list *ngFor="let componente of componentes, index as i">
-  <ion-item detail>
-    <ion-button routerLink={{componente.path}} expand="block">{{componente.name}}</ion-button>
-  </ion-item>
-</ion-list>
+  <ion-list *ngFor="let componente of componentes, index as i">
+    <ion-item detail>
+      <ion-button routerLink={{componente.ruta}} expand="full" [color]="componente.color">
+        <ion-icon slot="start" [name]="componente.icono"></ion-icon>
+        {{componente.nombre}}
+      </ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>
