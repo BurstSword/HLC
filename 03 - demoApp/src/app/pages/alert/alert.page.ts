@@ -75,7 +75,6 @@ export class AlertPage implements OnInit {
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Alerta',
-      subHeader: 'Mensaje',
       message: 'Apruébame David por favor',
       buttons: ['OK']
     });
@@ -87,7 +86,6 @@ export class AlertPage implements OnInit {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Multiples Botones',
-      subHeader: 'Subtitle',
       message: '¿Aprobar a Miguel?',
       buttons: ['Sí', 'Sí', 'Sí++']
     });
@@ -97,21 +95,20 @@ export class AlertPage implements OnInit {
 
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Confirm!',
-      message: 'Message <strong>text</strong>!!!',
+      header: 'Confirma',
+      message: 'Miguel ha aprobado!',
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-            console.log('Confirm Cancel: blah');
+            console.log('Mal hecho');
           }
         }, {
           text: 'Okay',
           handler: () => {
-            console.log('Confirm Okay');
+            console.log('Bien hecho');
           }
         }
       ]
@@ -123,65 +120,26 @@ export class AlertPage implements OnInit {
   async presentAlertPrompt() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'Prompt!',
+      header: 'Formulario',
       inputs: [
         {
-          name: 'name1',
+          name: 'Nombre',
           type: 'text',
-          placeholder: 'Placeholder 1'
+          placeholder: 'Nombre'
         },
-        {
-          name: 'name2',
-          type: 'text',
-          id: 'name2-id',
-          value: 'hello',
-          placeholder: 'Placeholder 2'
-        },
+        
         // multiline input.
         {
-          name: 'paragraph',
-          id: 'paragraph',
-          type: 'textarea',
-          placeholder: 'Placeholder 3'
+          name: 'apellido',
+          type: 'text',
+          placeholder: 'Apellido'
         },
-        {
-          name: 'name3',
-          value: 'http://ionicframework.com',
-          type: 'url',
-          placeholder: 'Favorite site ever'
-        },
-        // input date with min & max
-        {
-          name: 'name4',
-          type: 'date',
-          min: '2017-03-01',
-          max: '2018-01-12'
-        },
-        // input date without min nor max
         {
           name: 'name5',
           type: 'date'
-        },
-        {
-          name: 'name6',
-          type: 'number',
-          min: -5,
-          max: 10
-        },
-        {
-          name: 'name7',
-          type: 'number'
-        },
-        {
-          name: 'name8',
-          type: 'password',
-          placeholder: 'Advanced Attributes',
-          cssClass: 'specialClass',
-          attributes: {
-            maxlength: 4,
-            inputmode: 'decimal'
-          }
         }
+        
+        
       ],
       buttons: [
         {
@@ -211,38 +169,38 @@ export class AlertPage implements OnInit {
         {
           name: 'radio1',
           type: 'radio',
-          label: 'Radio 1',
+          label: 'Aprobar',
           value: 'value1',
           checked: true
         },
         {
           name: 'radio2',
           type: 'radio',
-          label: 'Radio 2',
+          label: 'Aprobar más',
           value: 'value2'
         },
         {
           name: 'radio3',
           type: 'radio',
-          label: 'Radio 3',
+          label: 'Pedazo de 10',
           value: 'value3'
         },
         {
           name: 'radio4',
           type: 'radio',
-          label: 'Radio 4',
+          label: 'Esa era',
           value: 'value4'
         },
         {
           name: 'radio5',
           type: 'radio',
-          label: 'Radio 5',
+          label: 'Aprobadísimo',
           value: 'value5'
         },
         {
           name: 'radio6',
           type: 'radio',
-          label: 'Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 Radio 6 ',
+          label: 'Al final has aprobado',
           value: 'value6'
         }
       ],
@@ -291,27 +249,6 @@ export class AlertPage implements OnInit {
           type: 'checkbox',
           label: 'Checkbox 3',
           value: 'value3'
-        },
-
-        {
-          name: 'checkbox4',
-          type: 'checkbox',
-          label: 'Checkbox 4',
-          value: 'value4'
-        },
-
-        {
-          name: 'checkbox5',
-          type: 'checkbox',
-          label: 'Checkbox 5',
-          value: 'value5'
-        },
-
-        {
-          name: 'checkbox6',
-          type: 'checkbox',
-          label: 'Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6',
-          value: 'value6'
         }
       ],
       buttons: [

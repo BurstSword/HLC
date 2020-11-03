@@ -1,18 +1,19 @@
 <app-cabecera [titulo]="'Alert'"></app-cabecera>
 
 <ion-content>
-    <!-- <ion-button (click)="onClick(1)">
-        Informativa
-    </ion-button>
-    <ion-button (click)="onClick(2)">
-        Multiples botones
-    </ion-button> -->
+   
 
-    <ion-list *ngFor="let boton of botones, index as i">
+    <!-- <ion-list *ngFor="let boton of botones, index as i">
         <ion-item>
             <ion-button expand="full" (click)="onClick(boton.numero)" [color]="boton.color">
                 {{boton.nombre}}
             </ion-button>
         </ion-item>
-    </ion-list>
+    </ion-list> -->
+
+    <ion-grid>
+        <ion-row >
+            <ion-col *ngFor="let boton of botones, index as i" size="6"><ion-button expand="full" (click)="onClick(boton.numero)" [color]="boton.color">{{boton.nombre}}</ion-button></ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

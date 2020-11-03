@@ -11,13 +11,13 @@ export class InicioPage implements OnInit {
     {
       nombre: "Action-sheet",
       ruta: "/action-sheet",
-      icono: "trash",
+      icono: "list-outline",
       color: "primary"
     },
     {
       nombre: "Alert",
       ruta: "/alert",
-      icono: "add",
+      icono: "alert-circle-outline",
       color: "primary"
     }
 
