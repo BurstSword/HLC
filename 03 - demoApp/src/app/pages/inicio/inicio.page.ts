@@ -18,7 +18,7 @@ export class InicioPage implements OnInit {
       nombre: "Alert",
       ruta: "/alert",
       icono: "alert-circle-outline",
-      color: "primary"
+      color: "warning"
     }
 
   ]

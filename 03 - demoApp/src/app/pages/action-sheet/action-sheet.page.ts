@@ -22,6 +22,7 @@ export class ActionSheetPage implements OnInit {
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Opciones',
+      backdropDismiss :false,
       buttons: [{
         text: 'Delete',
         role: 'destructive',

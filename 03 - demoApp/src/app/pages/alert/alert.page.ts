@@ -130,12 +130,12 @@ export class AlertPage implements OnInit {
         
         // multiline input.
         {
-          name: 'apellido',
+          name: 'Apellido',
           type: 'text',
           placeholder: 'Apellido'
         },
         {
-          name: 'name5',
+          name: 'Fecha de Nacimiento',
           type: 'date'
         }
         
@@ -151,8 +151,8 @@ export class AlertPage implements OnInit {
           }
         }, {
           text: 'Ok',
-          handler: () => {
-            console.log('Confirm Ok');
+          handler: (data) => {
+            console.log(data);
           }
         }
       ]
@@ -230,25 +230,25 @@ export class AlertPage implements OnInit {
       header: 'Checkbox',
       inputs: [
         {
-          name: 'checkbox1',
+          name: 'Sevilla',
           type: 'checkbox',
-          label: 'Checkbox 1',
-          value: 'value1',
+          label: 'Sevilla',
+          value: 'Sevilla',
           checked: true
         },
 
         {
-          name: 'checkbox2',
+          name: 'Betis',
           type: 'checkbox',
-          label: 'Checkbox 2',
-          value: 'value2'
+          label: 'Betis',
+          value: 'Betis'
         },
 
         {
-          name: 'checkbox3',
+          name: 'Madrid',
           type: 'checkbox',
-          label: 'Checkbox 3',
-          value: 'value3'
+          label: 'Madrid',
+          value: 'Madrid'
         }
       ],
       buttons: [
@@ -261,8 +261,8 @@ export class AlertPage implements OnInit {
           }
         }, {
           text: 'Ok',
-          handler: () => {
-            console.log('Confirm Ok');
+          handler: (data) => {
+            console.log(data);
           }
         }
       ]

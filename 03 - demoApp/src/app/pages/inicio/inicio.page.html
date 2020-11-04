@@ -7,12 +7,12 @@
 <ion-content>
 
 
-  <ion-list *ngFor="let componente of componentes, index as i">
-    <ion-item detail>
-      <ion-button routerLink={{componente.ruta}} expand="full" [color]="componente.color">
-        <ion-icon slot="start" [name]="componente.icono"></ion-icon>
-        {{componente.nombre}}
-      </ion-button>
+  <ion-list >
+    <ion-item class="ion-margin" *ngFor="let componente of componentes, index as i" detail [routerLink]="componente.ruta" expand="full" [color]="componente.color">
+
+      <ion-icon slot="start" [name]="componente.icono"></ion-icon>
+      {{componente.nombre}}
+
     </ion-item>
   </ion-list>
 </ion-content>
