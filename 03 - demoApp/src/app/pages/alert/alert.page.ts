@@ -84,7 +84,6 @@ export class AlertPage implements OnInit {
 
   async presentAlertMultipleButtons() {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
       header: 'Multiples Botones',
       message: '¿Aprobar a Miguel?',
       buttons: ['Sí', 'Sí', 'Sí++']
@@ -119,7 +118,6 @@ export class AlertPage implements OnInit {
 
   async presentAlertPrompt() {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
       header: 'Formulario',
       inputs: [
         {
@@ -163,7 +161,6 @@ export class AlertPage implements OnInit {
 
   async presentAlertRadio() {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
       header: 'Radio',
       inputs: [
         {
@@ -226,7 +223,6 @@ export class AlertPage implements OnInit {
 
   async presentAlertCheckbox() {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
       header: 'Checkbox',
       inputs: [
         {
