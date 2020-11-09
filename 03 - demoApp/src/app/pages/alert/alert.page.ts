@@ -13,7 +13,7 @@ export class AlertPage implements OnInit {
     {
       nombre: "Informativo",
       numero: 1,
-      color: "primary"
+      color: "rojizo"
     },
     {
       nombre: "Multiples botones",
