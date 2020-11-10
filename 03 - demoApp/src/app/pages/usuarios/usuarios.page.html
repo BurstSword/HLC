@@ -2,7 +2,7 @@
 
 <ion-content>
 
-  <ion-refresher *ngIf="cargador" #miRefresher slot="fixed" (ionRefresh)="refresca($event)">
+  <ion-refresher  #miRefresher slot="fixed" (ionRefresh)="refresca($event)">
     <ion-refresher-content refreshingSpinner="dots" refreshingText="Cargando...">
     </ion-refresher-content>
 
@@ -32,7 +32,7 @@
     </ion-fab-button>
   </ion-fab>
 
-  <ion-infinite-scroll *ngIf="!cargador" #miInfinite threshold="100px" (ionInfinite)="loadData($event)">
+  <ion-infinite-scroll  #miInfinite threshold="100px" (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content
       loadingSpinner="crescent"
       loadingText="Cargando...">
