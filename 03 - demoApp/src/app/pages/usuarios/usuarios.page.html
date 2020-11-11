@@ -7,7 +7,7 @@
     </ion-refresher-content>
 
   </ion-refresher>
-  <ion-item *ngIf="numeroPagina==1">
+  <ion-item>
     <ion-icon slot="end" name="arrow-down"></ion-icon>
     <ion-label>Arrastra para actualizar</ion-label>
   </ion-item>
@@ -26,7 +26,7 @@
 
 
 
-  <ion-fab (click)="limpiar()" *ngIf="numeroPagina!=1" vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab (click)="limpiar()" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="danger">
       <ion-icon name="trash"></ion-icon>
     </ion-fab-button>

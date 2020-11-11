@@ -8,14 +8,19 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UsuariosService {
+  public numero:number =1;
+  constructor(private _http:HttpClient) { 
+    
+  }
 
-  constructor(private _http:HttpClient) { }
-
-  getUsuarios(numero){
+  getUsuarios(){
     return new Promise<RespuestaUsuarios>(resolve=>{
-      this._http.get<RespuestaUsuarios>("https://reqres.in/api/users?page="+numero+"").subscribe(resp=>{
+      this._http.get<RespuestaUsuarios>("https://reqres.in/api/users?page="+this.numero+"").subscribe(resp=>{
         resolve(resp);
+        
       });
+      this.numero++;
     });
+    
   }
 }
