@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 import { Componente } from 'src/app/interfaces/interfaces';
+import { DatosComponentesService } from '../../services/datos-componentes.service';
 
 @Component({
   selector: 'app-inicio',
@@ -7,33 +9,13 @@ import { Componente } from 'src/app/interfaces/interfaces';
   styleUrls: ['./inicio.page.scss'],
 })
 export class InicioPage implements OnInit {
-  componentes: Componente[] = [
-    {
-      nombre: "Action-sheet",
-      ruta: "/action-sheet",
-      icono: "list-outline",
-      color: "primary"
-    },
-    {
-      nombre: "Alert",
-      ruta: "/alert",
-      icono: "alert-circle-outline",
-      color: "warning"
-    },
-    {
-      nombre: "Usuarios",
-      ruta: "/usuarios",
-      icono: "person",
-      color: "rojizo"
-    }
-
-  ]
-  constructor() {
+  constructor(private _datos:DatosComponentesService) {
 
   }
-
-  ngOnInit() {
-
+  public componentes:Componente[]=[];
+  
+  async ngOnInit() {
+   this.componentes= await this._datos.getDatos();
   }
-
+  
 }

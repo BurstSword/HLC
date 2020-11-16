@@ -16,42 +16,39 @@ export class UsuariosPage implements OnInit {
   @ViewChild('miRefresher') refresher: IonRefresher;
   @ViewChild('miInfinite') infinite: IonInfiniteScroll;
   constructor(private _mensajeService: MensajesService, private _usuariosService: UsuariosService, private router: Router) { }
+
   public usuarios: Usuario[] = [];
   public numeroPagina: number;
-  public cargador:boolean;
+  public cargador: boolean;
+
   ngOnInit() {
-    this.numeroPagina = 1;
-    this.cargador=true;
+    this.cargador = true;
   }
 
-  
+
 
   async refresca() {
-    const datos = await this._usuariosService.getUsuarios(this.numeroPagina);
-    setTimeout(() => {
+    const datos = await this._usuariosService.getUsuarios();
 
-      if (datos.total_pages > 0 && this.numeroPagina <= datos.total_pages) {
-        this.usuarios.unshift(...datos.data);
-        this.numeroPagina++;
-      }
-      this.refresher.complete();
-    }, 1500);
+    if (datos.total_pages > 0) {
+      this.usuarios.unshift(...datos.data);
+    }
+    this.refresher.complete();
   }
 
-  limpiar(){
-    this.numeroPagina=1;
-    this.usuarios=[];
+  limpiar() {
+    this._usuariosService.numero = 1;
+    this.usuarios = [];
     this._mensajeService.muestraMensaje("Usuarios eliminados con éxito");
   }
 
-  async loadData(){
-    const datos = await this._usuariosService.getUsuarios(this.numeroPagina);
+  async loadData() {
+    const datos = await this._usuariosService.getUsuarios();
     setTimeout(() => {
 
-      if (datos.total_pages > 0 && this.numeroPagina <= datos.total_pages) {
-        this.usuarios.unshift(...datos.data);
-        this.numeroPagina++;
-      }else{
+      if (datos.total_pages > 0) {
+        this.usuarios.push(...datos.data);
+      } else {
         this.infinite.disabled = true;
       }
       this.infinite.complete();

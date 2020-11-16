@@ -1,0 +1,27 @@
+[
+    {
+      "nombre": "Action-sheet",
+      "ruta": "/action-sheet",
+      "icono": "list-outline",
+      "color": "primary"
+    },
+    {
+      "nombre": "Alert",
+      "ruta": "/alert",
+      "icono": "alert-circle-outline",
+      "color": "warning"
+    },
+    {
+      "nombre": "Usuarios",
+      "ruta": "/usuarios",
+      "icono": "person",
+      "color": "rojizo"
+    },
+    {
+      "nombre": "Loading",
+      "ruta": "/loading",
+      "icono": "refresh",
+      "color": "success"
+    }
+
+]
