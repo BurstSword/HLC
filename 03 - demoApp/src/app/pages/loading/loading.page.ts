@@ -24,17 +24,14 @@ export class LoadingPage implements OnInit {
   async onClick2() {
     this._mensajesService.muestraLoading("Cargando");
     let data = await this._usuariosService.getUsuarios();
-    console.log(data);
-     data = await this._usuariosService.getUsuarios();
-     data = await this._usuariosService.getUsuarios();
-     this._mensajesService.ocultaLoading();
+    data = await this._usuariosService.getUsuarios();
+    data = await this._usuariosService.getUsuarios();
+    this._mensajesService.ocultaLoading();
   }
   async mostrarCarga() {
     const loading = await this.loadingController.create({
       message: 'Please wait...',
     });
     await loading.present();
-
-
   }
 }
