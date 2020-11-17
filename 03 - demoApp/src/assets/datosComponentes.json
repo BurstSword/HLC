@@ -22,6 +22,18 @@
       "ruta": "/loading",
       "icono": "refresh",
       "color": "success"
+    },
+    {
+      "nombre": "Botones",
+      "ruta": "/botones",
+      "icono": "radio-button-on",
+      "color": "medium"
+    },
+    {
+      "nombre": "Tabs",
+      "ruta": "/tabs",
+      "icono": "menu",
+      "color": "dark"
     }
 
 ]

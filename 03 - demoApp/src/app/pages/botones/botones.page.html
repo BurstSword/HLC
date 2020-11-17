@@ -1,0 +1,43 @@
+<app-cabecera [titulo]="'Botones'"></app-cabecera>
+
+<ion-content>
+  <ion-chip>
+    <ion-label color="secondary">Secundaria</ion-label>
+  </ion-chip>
+  
+  <ion-chip color="secondary">
+    <ion-label color="dark">Secundaria oscura</ion-label>
+  </ion-chip>
+  
+  <ion-chip>
+    <ion-icon name="pin"></ion-icon>
+    <ion-label>Default</ion-label>
+  </ion-chip>
+  <ion-fab vertical="top" horizontal="end" slot="fixed" edge>
+    <ion-fab-button color="rojizo">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab vertical="center" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button>Holi</ion-fab-button>
+
+    <ion-fab-list side="start">
+      <ion-fab-button>
+        <ion-icon name="logo-vimeo"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="logo-chrome"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="logo-react"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  
+</ion-content>
