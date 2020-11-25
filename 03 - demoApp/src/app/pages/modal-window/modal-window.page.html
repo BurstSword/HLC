@@ -1,0 +1,28 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="danger">
+    <ion-buttons slot="end">
+      <ion-button (click)="cancelar()">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Edición</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-no-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label>Nombre: {{dato.nombre}} </ion-label>
+      <ion-input [(ngModel)]="dato.nombre" type="text" placeholder="Awesome Input" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Apellido: {{dato.apellido}} </ion-label>
+      <ion-input type="text" placeholder="Awesome Input" [(ngModel)]="dato.apellido"></ion-input>
+    </ion-item>
+  </ion-list>
+  
+
+<ion-button (click)="modificar()" expand="block" color="primary" shape="round">
+  Modificar datos
+</ion-button>
+</ion-content>

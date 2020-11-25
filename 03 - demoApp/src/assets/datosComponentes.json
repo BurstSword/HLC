@@ -46,6 +46,12 @@
       "ruta": "/slides",
       "icono": "arrow-back-outline",
       "color": "success"
+    },
+    {
+      "nombre": "Modal",
+      "ruta": "/modal-demo",
+      "icono": "person-outline",
+      "color": "danger"
     }
 
 ]

@@ -14,12 +14,12 @@ export class ItemSlidingPage implements OnInit {
   ngOnInit() {
   }
 
-  favorite(nombre:string){
-    console.log(nombre);
+  favorite(id:number){
+    
     this.miLista.closeSlidingItems();
   }
-  share(nombre:string){
-    console.log(nombre);
+  share(id:number){
+    
     this.miLista.closeSlidingItems();
   }
 }

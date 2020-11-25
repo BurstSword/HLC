@@ -2,10 +2,10 @@
 
 <ion-content>
 <ion-list #miLista>
-  <ion-item-sliding *ngFor="let item of lista">
+  <ion-item-sliding *ngFor="let item of lista;let i = index">
     <ion-item-options side="start">
-      <ion-item-option (click)="favorite()"><ion-icon slot="start" name="archive-outline"></ion-icon></ion-item-option>
-      <ion-item-option (click)="share()" color="danger"><ion-icon slot="start" name="bluetooth-outline"></ion-icon></ion-item-option>
+      <ion-item-option (click)="favorite(i)"><ion-icon slot="start" name="archive-outline"></ion-icon></ion-item-option>
+      <ion-item-option (click)="share(i)" color="danger"><ion-icon slot="start" name="bluetooth-outline"></ion-icon></ion-item-option>
     </ion-item-options>
     <ion-item>
       <ion-label>{{item}}</ion-label>
