@@ -1,0 +1,21 @@
+
+
+<ion-content>
+<ion-label *ngIf="!haybares">No hay bares churrita</ion-label>
+<ion-list *ngFor="let bar of bares">
+    <ion-card color={{bar.color}}>
+        <ion-item>
+          <ion-avatar slot="start">
+            <img [src]="bar.foto" />
+        </ion-avatar>
+          
+          <ion-label>{{bar.nombre}}</ion-label>
+          <ion-button fill="outline" slot="end">View</ion-button>
+        </ion-item>
+      
+        <ion-card-content>
+          {{bar.descripcion}}
+        </ion-card-content>
+      </ion-card>
+</ion-list>
+</ion-content>
