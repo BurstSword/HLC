@@ -1,0 +1,57 @@
+[
+    {
+      "nombre": "Action-sheet",
+      "ruta": "/action-sheet",
+      "icono": "list-outline",
+      "color": "primary"
+    },
+    {
+      "nombre": "Alert",
+      "ruta": "/alert",
+      "icono": "alert-circle-outline",
+      "color": "warning"
+    },
+    {
+      "nombre": "Usuarios",
+      "ruta": "/usuarios",
+      "icono": "person",
+      "color": "rojizo"
+    },
+    {
+      "nombre": "Loading",
+      "ruta": "/loading",
+      "icono": "refresh",
+      "color": "success"
+    },
+    {
+      "nombre": "Botones",
+      "ruta": "/botones",
+      "icono": "radio-button-on",
+      "color": "medium"
+    },
+    {
+      "nombre": "Tabs",
+      "ruta": "/tabs",
+      "icono": "menu",
+      "color": "dark"
+    },
+    {
+      "nombre": "Item Slide",
+      "ruta": "/item-sliding",
+      "icono": "arrow-forward-outline",
+      "color": "light"
+    },
+    {
+      "nombre": "Slides",
+      "ruta": "/slides",
+      "icono": "arrow-back-outline",
+      "color": "success"
+    },
+    {
+      "nombre": "Modal",
+      "ruta": "/modal-demo",
+      "icono": "person-outline",
+      "color": "danger"
+    }
+
+]
