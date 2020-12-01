@@ -8,6 +8,7 @@ import { PaginaBaresPageRoutingModule } from './pagina-bares-routing.module';
 
 import { PaginaBaresPage } from './pagina-bares.page';
 
+
 @NgModule({
   imports: [
     CommonModule,

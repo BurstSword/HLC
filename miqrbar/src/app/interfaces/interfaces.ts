@@ -3,5 +3,7 @@ export interface Bar{
     carta:string,
     foto:string,
     color:string,
-    descripcion:string
+    descripcion:string,
+    valoracion:number,
+    numeroBar:number
 }
