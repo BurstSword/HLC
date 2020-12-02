@@ -34,7 +34,7 @@ export class PaginaBaresPage implements OnInit {
     {
       nombre: "Casa Paco",
       carta: "Holi8",
-      foto: "https://dam.ngenespanol.com/wp-content/uploads/2019/10/datos-sobre-el-cafe.jpg",
+      foto: "https://images.alphacoders.com/247/thumb-1920-247333.jpg",
       color: "warning",
       descripcion: "fbhsdjfsdjfjsdjfsdfd",
       valoracion: 2.5,

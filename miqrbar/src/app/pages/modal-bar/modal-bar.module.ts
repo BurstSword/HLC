@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ModalBarPageRoutingModule } from './modal-bar-routing.module';
 
 import { ModalBarPage } from './modal-bar.page';
-import { StarRating } from 'ionic5-star-rating';
+
 
 @NgModule({
   imports: [

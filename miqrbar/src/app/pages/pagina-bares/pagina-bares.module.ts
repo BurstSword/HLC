@@ -7,14 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { PaginaBaresPageRoutingModule } from './pagina-bares-routing.module';
 
 import { PaginaBaresPage } from './pagina-bares.page';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PaginaBaresPageRoutingModule
+    PaginaBaresPageRoutingModule,
+    FontAwesomeModule
   ],
   declarations: [PaginaBaresPage]
 })

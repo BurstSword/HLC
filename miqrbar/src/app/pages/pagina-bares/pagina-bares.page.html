@@ -1,34 +1,52 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Lista Bares</ion-title>
+    <ion-title class="textoBar">Bares Guardados</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-label *ngIf="!haybares">No hay bares churrita</ion-label>
-  <ion-list *ngFor="let bar of bares">  
-     <ion-card class="tarjetaBar">
-       <div id="container" class="box">
-       <img [src]="bar.foto" class="fotoBar" >
-       <div class="box bottom">
-        <ion-item class="textoBar">
-          <ion-label>{{bar.nombre}}</ion-label>
-          <ion-label><ion-icon name="star"></ion-icon> {{bar.valoracion}}</ion-label>
-          <ion-button fill="none" slot="end"><ion-icon name="map-outline"></ion-icon></ion-button>
-          <ion-button fill="none" slot="end" (click)="mostrarModal(bar.numeroBar)"><ion-icon name="pencil"></ion-icon></ion-button>
-        </ion-item>
-       </div>
-      </div>
-      </ion-card> 
+  <ion-list *ngFor="let bar of bares">
+    <ion-card class="tarjetaBar">
+      <div id="container">
+        <div class="enlaceGPS">
+          <div class="textoEnlaceGPS">
+            <ion-label>Ir al sitio <fa-icon class="iconoIr" icon="map-marked-alt"></fa-icon>
+            </ion-label>
+          </div>
 
-      
+
+        </div>
+        <img [src]="bar.foto" class="fotoBar">
+        <div class="box bottom">
+          <ion-item class="textoBar">
+            <ion-label>{{bar.nombre}}</ion-label>
+            <div class="valoracion">
+            <ion-label>
+              <fa-icon icon="star"></fa-icon> {{bar.valoracion}}
+            </ion-label>
+            </div>
+            <ion-button fill="none" slot="end" (click)="mostrarModal(bar.numeroBar)">
+              <fa-icon icon="pen"></fa-icon>
+            </ion-button>
+          </ion-item>
+        </div>
+      </div>
+    </ion-card>
+
+
 
   </ion-list>
+
   
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button>
-      <ion-icon name="qr-code-outline"></ion-icon>
-      <ion-badge color="none">+</ion-badge>
-    </ion-fab-button>
-  </ion-fab>
+  
 </ion-content>
+<ion-fab vertical="bottom" horizontal="center" slot="fixed">
+  <ion-fab-button>
+    <fa-icon icon="camera"></fa-icon>
+  </ion-fab-button>
+</ion-fab>
+<ion-footer>
+  <ion-toolbar>
+  </ion-toolbar>
+</ion-footer>
