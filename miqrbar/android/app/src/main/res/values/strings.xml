@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">miqrbar</string>
+    <string name="title_activity_main">miqrbar</string>
+    <string name="package_name">io.ionic.qrbar</string>
+    <string name="custom_url_scheme">io.ionic.qrbar</string>
+</resources>

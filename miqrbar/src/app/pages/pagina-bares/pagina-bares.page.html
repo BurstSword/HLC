@@ -7,45 +7,82 @@
 <ion-content>
   <ion-label *ngIf="!haybares">No hay bares churrita</ion-label>
   <ion-list *ngFor="let bar of bares">
-    <ion-card class="tarjetaBar">
-      <div id="container">
+    <ion-card class="tarjetaBar"  *ngIf="!bar.pulsado" (click)="cambiarTarjeta(bar.numeroBar,$event)">
+      
         <div class="enlaceGPS">
           <div class="textoEnlaceGPS">
             <ion-label>Ir al sitio <fa-icon class="iconoIr" icon="map-marked-alt"></fa-icon>
             </ion-label>
           </div>
-
-
         </div>
-        <img [src]="bar.foto" class="fotoBar">
+
+
+        <img  [src]="bar.foto" class="fotoBar">
         <div class="box bottom">
-          <ion-item class="textoBar">
+          <ion-item class="textoBar" lines="none">
             <ion-label>{{bar.nombre}}</ion-label>
             <div class="valoracion">
-            <ion-label>
-              <fa-icon icon="star"></fa-icon> {{bar.valoracion}}
-            </ion-label>
+              <ion-label>
+                <fa-icon icon="star"></fa-icon> {{bar.valoracion}}
+              </ion-label>
             </div>
-            <ion-button fill="none" slot="end" (click)="mostrarModal(bar.numeroBar)">
-              <fa-icon icon="pen"></fa-icon>
-            </ion-button>
+            <div id="botonEditar">
+              <button></button>
+              <ion-button fill="none" slot="end" (click)="mostrarModal(bar.numeroBar)">
+                <fa-icon icon="pen"></fa-icon>
+              </ion-button>
+            </div>
           </ion-item>
         </div>
-      </div>
+      
     </ion-card>
 
+    <ion-card class="tarjetaBar" *ngIf="bar.pulsado">
+      
+        <div class="enlaceGPS">
+          <div class="textoEnlaceGPS">
+            <ion-label>Ir al sitio <fa-icon class="iconoIr" icon="map-marked-alt"></fa-icon>
+            </ion-label>
+          </div>
+        </div>
 
 
+        <div (click)="cambiarTarjeta(bar.numeroBar,$event)" class="fakeFoto">
+          
+            <ion-label class="nombreBar">{{bar.nombre}}</ion-label>
+            <div class="valoracion valoracion2">
+              <ion-label>
+                <fa-icon icon="star"></fa-icon> {{bar.valoracion}}
+              </ion-label>
+            </div>
+            <ion-item lines="none">
+              <ion-label>{{bar.descripcion}}</ion-label>
+            </ion-item>
+            
+            <ion-item lines="none">
+              <ion-label><a [href]="bar.url">Ver carta</a></ion-label>
+              <ion-button fill="none" slot="end" (click)="mostrarModal(bar.numeroBar)">
+                <fa-icon icon="pen"></fa-icon>
+              </ion-button>
+            </ion-item>
+        </div>
+        
+          
+        
+      
+    </ion-card>
   </ion-list>
 
-  
-  
+
+
 </ion-content>
 <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-  <ion-fab-button>
+  <ion-fab-button class="fabButtonQR" (click)="introducirBar()">
     <fa-icon icon="camera"></fa-icon>
   </ion-fab-button>
 </ion-fab>
+
+
 <ion-footer>
   <ion-toolbar>
   </ion-toolbar>

@@ -38,6 +38,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="F:/SDKAndroid" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../miqrbar/android" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
@@ -117,5 +118,11 @@
       <updated>1606839120439</updated>
     </task>
     <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1220" y="274" key="FileChooserDialogImpl" timestamp="1606936534536">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1220" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1606936534536" />
   </component>
 </project>

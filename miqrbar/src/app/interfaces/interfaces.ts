@@ -1,3 +1,5 @@
+import { URL, Url } from 'url';
+
 export interface Bar{
     nombre:string,
     carta:string,
@@ -5,5 +7,7 @@ export interface Bar{
     color:string,
     descripcion:string,
     valoracion:number,
-    numeroBar:number
+    numeroBar:number,
+    url:string,
+    pulsado:boolean
 }
