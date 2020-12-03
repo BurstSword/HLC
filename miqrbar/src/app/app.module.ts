@@ -15,10 +15,11 @@ import { far } from '@fortawesome/free-regular-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { IonicStorageModule } from '@ionic/storage';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FontAwesomeModule],
+  imports: [BrowserModule, IonicModule.forRoot(),IonicStorageModule.forRoot(), AppRoutingModule,FontAwesomeModule],
   providers: [
     StatusBar,
     SplashScreen,

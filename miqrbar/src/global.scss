@@ -40,11 +40,21 @@
     height: 100px;
     object-fit: cover;
     z-index: 0;
+    --ion-color:#3f8086!important;
+    color: #3f8086;
 }
 ion-card{
     height: 150px !important;
 }
-
+.tarjetaReverso{
+    display: flex;
+    flex-direction: column;
+    width: 90% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    background-color: white;
+    border-radius: 8px !important; 
+}
 .enlaceGPS{
     width: 30%;
     height: 30px;
@@ -75,7 +85,6 @@ margin-left: 12%;
     display: flex;
     flex-direction: column;
     width: 90% !important;
-    height: 30% !important;
     margin-left: auto !important;
     margin-right: auto !important;
     background-color: white;
@@ -112,10 +121,19 @@ ion-input{
     border: black solid 1px !important;
 }
 .valoracion{
-    margin-right: 45%;
+    margin-right: 35%;
 }
 .valoracion2{
     margin-top: 3% !important;
     margin-bottom: 3%;
+}
+.editarReverso{
+    margin-right: 5.4%;
+    margin-bottom:2.7%;
+}
+.listaReverso{
+    margin-bottom: -3%;
+    --ion-color:#3f8086!important;
+    color: #3f8086;
 }
 

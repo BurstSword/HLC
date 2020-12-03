@@ -10,10 +10,10 @@ import { Bar } from 'src/app/interfaces/interfaces';
 export class ModalBarPage implements OnInit {
 
   constructor(private ModalController: ModalController) { }
-  @Input() bar :Bar
-  
+  @Input() bar: Bar
+
   ngOnInit() {
-    
+
   }
 
   cancelar() {
@@ -24,8 +24,6 @@ export class ModalBarPage implements OnInit {
   }
 
   ratingFilter(rating) {
-    
-    return this.bar.valoracion = Math.round( rating * 10 ) / 10;
-    
-}
+    return this.bar.valoracion = Math.round(rating * 10) / 10;
+  }
 }

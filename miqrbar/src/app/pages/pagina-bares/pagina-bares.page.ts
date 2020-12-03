@@ -4,7 +4,7 @@ import { Bar } from '../../interfaces/interfaces';
 import { ModalBarPage } from '../modal-bar/modal-bar.page';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { URL } from 'url';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-pagina-bares',
@@ -13,62 +13,14 @@ import { URL } from 'url';
 })
 export class PaginaBaresPage implements OnInit {
 
-  constructor(private modalController: ModalController, private barcodeScanner: BarcodeScanner, private iab: InAppBrowser) { }
+  constructor(private modalController: ModalController, private barcodeScanner: BarcodeScanner, private iab: InAppBrowser,private storage: Storage) { }
   public haybares: boolean;
   public bar: Bar;
-  public bares: Bar[] = [
-    {
-      nombre: "Casa Pepe",
-      carta: "Holi",
-      foto: "https://www.thoughtco.com/thmb/Yg92CRBhQ66tEoyks18uy94y9qc=/1500x1000/filters:fill(auto,1)/french-bar-58c2365f5f9b58af5ce3fe9c.jpg",
-      color: "primary",
-      descripcion: "fbhsdjfsdjfjsdjfsdfd",
-      valoracion: 4.5,
-      numeroBar: 0,
-      url: "https://www.google.com/",
-      pulsado: false
-    },
-    {
-      nombre: "Casa Loli",
-      carta: "Holi3",
-      foto: "https://dam.ngenespanol.com/wp-content/uploads/2019/10/datos-sobre-el-cafe.jpg",
-      color: "danger",
-      descripcion: "fbhsdjfsdjfjsdjfsdfd",
-      valoracion: 2.5,
-      numeroBar: 1,
-      url: "https://www.google.com/",
-      pulsado: false
-    },
-    {
-      nombre: "Casa Paco",
-      carta: "Holi8",
-      foto: "https://images.alphacoders.com/247/thumb-1920-247333.jpg",
-      color: "warning",
-      descripcion: "fbhsdjfsdjfjsdjfsdfd",
-      valoracion: 2.5,
-      numeroBar: 2,
-      url: "https://www.google.com/",
-      pulsado: false
-    },
-    {
-      nombre: "Casa Sonia",
-      carta: "Holi8",
-      foto: "https://dam.ngenespanol.com/wp-content/uploads/2019/10/datos-sobre-el-cafe.jpg",
-      color: "warning",
-      descripcion: "fbhsdjfsdjfjsdjfsdfd",
-      valoracion: 2.5,
-      numeroBar: 3,
-      url: "https://www.google.com/",
-      pulsado: false
-    },
-
-  ];
+  public bares: Bar[] = [];
   ngOnInit() {
-    if (this.bares == []) {
-      this.haybares = false;
-    } else {
-      this.haybares = true;
-    }
+    this.cargarBares();
+    /* this.bares=[];
+    this.guardarBares(); */
   }
 
   async mostrarModal(numeroBar: number) {
@@ -78,9 +30,7 @@ export class PaginaBaresPage implements OnInit {
       componentProps: {
         bar: {
           nombre: this.bares[numeroBar].nombre,
-          carta: this.bares[numeroBar].carta,
           foto: this.bares[numeroBar].foto,
-          color: this.bares[numeroBar].color,
           descripcion: this.bares[numeroBar].descripcion,
           valoracion: this.bares[numeroBar].valoracion,
           numeroBar: this.bares[numeroBar].numeroBar
@@ -91,51 +41,72 @@ export class PaginaBaresPage implements OnInit {
     const { data } = await modal.onDidDismiss();
     if (data) {
       this.bares[numeroBar] = data;
+      this.guardarBares();
     }
 
   }
 
-  escanearCarta() {
-    this.barcodeScanner.scan().then(barcodeData => {
-      const url = new URL(barcodeData.text)
-
-      this.mostrarInAppBrowser(url);
-      this.introducirBar(url)
-    }).catch(err => {
-      console.log('Error', err);
-    });
-  }
-
-  mostrarInAppBrowser(url: URL) {
-    this.iab.create(url.origin, "_blank", {
+  mostrarInAppBrowser(url: string) {
+    this.iab.create(url, "_system", {
       location: "yes",
     });
   }
 
-  introducirBar(url: URL) {
+  crearBar(url: string) {
     this.bar = {
-      nombre: "",
-      carta: "Holi",
+      nombre: "Nombre generico",
       foto: "https://www.thoughtco.com/thmb/Yg92CRBhQ66tEoyks18uy94y9qc=/1500x1000/filters:fill(auto,1)/french-bar-58c2365f5f9b58af5ce3fe9c.jpg",
-      color: "primary",
       descripcion: "",
       valoracion: 0,
       numeroBar: this.bares.length,
-      url: "https://www.google.com/",
+      url: url,
       pulsado: false
     }
-
-    this.bares.push(this.bar)
-    this.mostrarModal(this.bar.numeroBar);
+      this.bares.push(this.bar);
+      this.guardarBares();
+      this.mostrarModal(this.bar.numeroBar);
   }
 
-  cambiarTarjeta(numeroBar: number, event: Event) {
-    console.log(document.getElementById("tarjetaDelantera").style.width);
-    //document.getElementById("tarjetaReverso").style.width=document.getElementById("tarjetaDelantera").style.width.valueOf();
+   cambiarTarjeta(numeroBar: number, event: Event) {
+    
     if (event.target != document.getElementById("botonEditar")) {
       this.bares[numeroBar].pulsado=!this.bares[numeroBar].pulsado;
     }
 
 
+  } 
+
+  escanearCarta():void {
+    this.barcodeScanner.scan().then(barcodeData => {
+      if(barcodeData.text!=""){
+        this.crearBar(barcodeData.text);
+      }
+      
+      
+      
+    }).catch(err => {
+      console.log('Error', err);
+    });
+    
+  }
+  
+  guardarBares():void{
+    this.storage.set('bares', this.bares);
+  }
+
+  cargarBares(){
+    this.storage.get('bares').then(bares=>{
+      if(bares!=null){
+        this.bares=bares;
+        this.haybares=true;
+      }
+    })
+  }
+  eliminarBar(bar:Bar):void{
+    const index=this.bares.indexOf(bar);
+    if(index>-1){
+      this.bares.splice(index,1);
+    }
+    this.guardarBares();
   }
 }
