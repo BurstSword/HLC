@@ -7,7 +7,8 @@
 <ion-content>
   <ion-label *ngIf="!haybares">No hay bares churrita</ion-label>
   <ion-list *ngFor="let bar of bares">
-    <ion-card class="tarjetaBar"  *ngIf="!bar.pulsado" (click)="cambiarTarjeta(bar.numeroBar,$event)">
+    <div id="tarjetaDelantera">
+    <ion-card class="tarjetaBar" *ngIf="!bar.pulsado" (click)="cambiarTarjeta(bar.numeroBar,$event)">
       
         <div class="enlaceGPS">
           <div class="textoEnlaceGPS">
@@ -36,8 +37,9 @@
         </div>
       
     </ion-card>
-
-    <ion-card class="tarjetaBar" *ngIf="bar.pulsado">
+  </div>
+    <div id="tarjetaReverso">
+    <ion-card  *ngIf="bar.pulsado">
       
         <div class="enlaceGPS">
           <div class="textoEnlaceGPS">
@@ -66,11 +68,8 @@
               </ion-button>
             </ion-item>
         </div>
-        
-          
-        
-      
     </ion-card>
+  </div>
   </ion-list>
 
 

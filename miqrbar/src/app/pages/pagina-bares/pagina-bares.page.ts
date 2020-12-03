@@ -130,8 +130,8 @@ export class PaginaBaresPage implements OnInit {
   }
 
   cambiarTarjeta(numeroBar: number, event: Event) {
-    console.log(document.getElementById("botonEditar"));
-    console.log(event.target);
+    console.log(document.getElementById("tarjetaDelantera").style.width);
+    //document.getElementById("tarjetaReverso").style.width=document.getElementById("tarjetaDelantera").style.width.valueOf();
     if (event.target != document.getElementById("botonEditar")) {
       this.bares[numeroBar].pulsado=!this.bares[numeroBar].pulsado;
     }
