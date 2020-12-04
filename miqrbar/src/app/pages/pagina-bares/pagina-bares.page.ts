@@ -16,7 +16,36 @@ export class PaginaBaresPage implements OnInit {
   constructor(private modalController: ModalController, private barcodeScanner: BarcodeScanner, private iab: InAppBrowser,private storage: Storage) { }
   public haybares: boolean;
   public bar: Bar;
-  public bares: Bar[] = [];
+  public bares: Bar[] = [
+    {
+      nombre: "Nombre generico",
+      foto: "https://www.thoughtco.com/thmb/Yg92CRBhQ66tEoyks18uy94y9qc=/1500x1000/filters:fill(auto,1)/french-bar-58c2365f5f9b58af5ce3fe9c.jpg",
+      descripcion: " Hola loco",
+      valoracion: 0,
+      numeroBar: 0,
+      url: "url",
+      pulsado: false
+    },
+    {
+      nombre: "Nombre generico",
+      foto: "https://www.thoughtco.com/thmb/Yg92CRBhQ66tEoyks18uy94y9qc=/1500x1000/filters:fill(auto,1)/french-bar-58c2365f5f9b58af5ce3fe9c.jpg",
+      descripcion: " Hola loco",
+      valoracion: 0,
+      numeroBar: 1,
+      url: "url",
+      pulsado: false
+    },
+    {
+      nombre: "Nombre generico",
+      foto: "https://www.thoughtco.com/thmb/Yg92CRBhQ66tEoyks18uy94y9qc=/1500x1000/filters:fill(auto,1)/french-bar-58c2365f5f9b58af5ce3fe9c.jpg",
+      descripcion: " Hola loco",
+      valoracion: 0,
+      numeroBar: 2,
+      url: "url",
+      pulsado: false
+    },
+    
+  ];
   ngOnInit() {
     this.cargarBares();
     /* this.bares=[];
@@ -81,9 +110,7 @@ export class PaginaBaresPage implements OnInit {
       if(barcodeData.text!=""){
         this.crearBar(barcodeData.text);
       }
-      
-      
-      
+     
     }).catch(err => {
       console.log('Error', err);
     });

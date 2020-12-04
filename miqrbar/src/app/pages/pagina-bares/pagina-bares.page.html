@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-label *ngIf="!haybares">No hay bares churrita</ion-label>
+   <!-- <ion-label *ngIf="!haybares">No hay bares churrita</ion-label>  -->
   <ion-list *ngFor="let bar of bares">
     <div id="tarjetaDelantera">
     <ion-card class="tarjetaBar" *ngIf="!bar.pulsado" (click)="cambiarTarjeta(bar.numeroBar,$event)">
