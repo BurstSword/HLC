@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { Bar } from '../../interfaces/interfaces';
 import { ModalBarPage } from '../modal-bar/modal-bar.page';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Storage } from '@ionic/storage';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Component({
   selector: 'app-pagina-bares',
@@ -13,18 +14,18 @@ import { Storage } from '@ionic/storage';
 })
 export class PaginaBaresPage implements OnInit {
 
-  constructor(private modalController: ModalController, private barcodeScanner: BarcodeScanner, private iab: InAppBrowser,private storage: Storage) { }
+  constructor(private modalController: ModalController, private barcodeScanner: BarcodeScanner, private iab: InAppBrowser,private storage: Storage, private geolocation: Geolocation, public alertController: AlertController) { }
   public haybares: boolean;
-  public bar: Bar;
   public bares: Bar[] = [
-    {
+     {
       nombre: "Nombre generico",
       foto: "https://www.thoughtco.com/thmb/Yg92CRBhQ66tEoyks18uy94y9qc=/1500x1000/filters:fill(auto,1)/french-bar-58c2365f5f9b58af5ce3fe9c.jpg",
       descripcion: " Hola loco",
       valoracion: 0,
       numeroBar: 0,
-      url: "url",
-      pulsado: false
+      url: "https://www.google.es/",
+      pulsado: false,
+      localizacion:"holi"
     },
     {
       nombre: "Nombre generico",
@@ -33,7 +34,8 @@ export class PaginaBaresPage implements OnInit {
       valoracion: 0,
       numeroBar: 1,
       url: "url",
-      pulsado: false
+      pulsado: false,
+      localizacion :"holi"
     },
     {
       nombre: "Nombre generico",
@@ -42,58 +44,62 @@ export class PaginaBaresPage implements OnInit {
       valoracion: 0,
       numeroBar: 2,
       url: "url",
-      pulsado: false
-    },
+      pulsado: false,
+      localizacion :"holi"
+    }, 
     
   ];
   ngOnInit() {
-    this.cargarBares();
-    /* this.bares=[];
-    this.guardarBares(); */
+    /*this.cargarBares();
+       this.bares=[];
+    this.guardarBares(); */ 
   }
 
-  async mostrarModal(numeroBar: number) {
+  async mostrarModal(bar: Bar) {
+    let newBar ={... bar}
     const modal = await this.modalController.create({
       component: ModalBarPage,
       cssClass: 'my-custom-modal-css',
       componentProps: {
-        bar: {
-          nombre: this.bares[numeroBar].nombre,
-          foto: this.bares[numeroBar].foto,
-          descripcion: this.bares[numeroBar].descripcion,
-          valoracion: this.bares[numeroBar].valoracion,
-          numeroBar: this.bares[numeroBar].numeroBar
-        }
+          newBar
       }
     })
     await modal.present();
-    const { data } = await modal.onDidDismiss();
-    if (data) {
-      this.bares[numeroBar] = data;
+    modal.onDidDismiss().then((resp) => {
+
+      if (resp.data) {
+
+        const index = this.bares.indexOf(bar);
+        this.bares.splice(index, 1, resp.data)
+
+      };
+
       this.guardarBares();
-    }
+
+    });
 
   }
 
   mostrarInAppBrowser(url: string) {
-    this.iab.create(url, "_system", {
+    this.iab.create(url, "_blank", {
       location: "yes",
     });
   }
 
-  crearBar(url: string) {
-    this.bar = {
-      nombre: "Nombre generico",
-      foto: "https://www.thoughtco.com/thmb/Yg92CRBhQ66tEoyks18uy94y9qc=/1500x1000/filters:fill(auto,1)/french-bar-58c2365f5f9b58af5ce3fe9c.jpg",
-      descripcion: "",
-      valoracion: 0,
-      numeroBar: this.bares.length,
-      url: url,
-      pulsado: false
-    }
-      this.bares.push(this.bar);
+  crearBar(url: string, geolocalizacion:string) {
+      this.mostrarInAppBrowser(url);
+      this.bares.push({
+        nombre: "Nombre generico",
+        foto: "https://www.thoughtco.com/thmb/Yg92CRBhQ66tEoyks18uy94y9qc=/1500x1000/filters:fill(auto,1)/french-bar-58c2365f5f9b58af5ce3fe9c.jpg",
+        descripcion: "",
+        valoracion: 0,
+        numeroBar: this.bares.length,
+        url: url,
+        pulsado: false,
+        localizacion: geolocalizacion,
+      });
       this.guardarBares();
-      this.mostrarModal(this.bar.numeroBar);
+      
   }
 
    cambiarTarjeta(numeroBar: number, event: Event) {
@@ -107,14 +113,15 @@ export class PaginaBaresPage implements OnInit {
 
   escanearCarta():void {
     this.barcodeScanner.scan().then(barcodeData => {
+      console.log(barcodeData.text);
       if(barcodeData.text!=""){
-        this.crearBar(barcodeData.text);
+        const geo = this.crearGeolocalizacion();
+        this.crearBar(barcodeData.text,geo);
       }
      
     }).catch(err => {
       console.log('Error', err);
     });
-    
   }
   
   guardarBares():void{
@@ -135,5 +142,46 @@ export class PaginaBaresPage implements OnInit {
       this.bares.splice(index,1);
     }
     this.guardarBares();
+  }
+  
+  crearGeolocalizacion(): string {
+
+    this.geolocation.getCurrentPosition().then((resp) => {
+
+      if (resp.coords.accuracy < 50) {
+        const latitud = resp.coords.latitude
+        const longitud = resp.coords.longitude
+        const localizacion = `https://maps.google.com/maps?z=25&t=m&q=loc:${latitud}+${longitud}`
+
+        return localizacion;
+
+      }
+
+    }).catch((err) => {
+
+     });
+    return '';
+  };
+  async confirmarEliminacion() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirm!',
+      message: 'Message <strong>text</strong>!!!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
   }
 }

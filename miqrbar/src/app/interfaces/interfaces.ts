@@ -5,5 +5,6 @@ export interface Bar{
     valoracion:number,
     numeroBar:number,
     url:string,
-    pulsado:boolean
+    pulsado:boolean,
+    localizacion:string
 }
