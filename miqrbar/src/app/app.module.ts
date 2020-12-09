@@ -17,6 +17,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +29,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     BarcodeScanner,
     InAppBrowser,
     Geolocation,
+    SocialSharing,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

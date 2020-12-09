@@ -6,6 +6,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Storage } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @Component({
   selector: 'app-pagina-bares',
@@ -14,7 +15,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 })
 export class PaginaBaresPage implements OnInit {
 
-  constructor(private modalController: ModalController, private barcodeScanner: BarcodeScanner, private iab: InAppBrowser,private storage: Storage, private geolocation: Geolocation, public alertController: AlertController) { }
+  constructor(private modalController: ModalController, private barcodeScanner: BarcodeScanner, private iab: InAppBrowser,private storage: Storage, private geolocation: Geolocation, public alertController: AlertController,private socialSharing:SocialSharing) { }
   public haybares: boolean;
   public bares: Bar[] = [
      {
@@ -183,5 +184,9 @@ export class PaginaBaresPage implements OnInit {
         }
       ]
     });
+  }
+
+  compartir(bar:Bar){
+    this.socialSharing.share("Seguro que te gusta " + bar.nombre, bar.descripcion,"", bar.url)
   }
 }
