@@ -22,7 +22,7 @@
             </div>
 
 
-            <img (click)="cambiarTarjeta(bar.numeroBar,$event)" [src]="bar.foto" class="fotoBar">
+            <img (click)="cambiarTarjeta(bar)" [src]="bar.foto" class="fotoBar">
             <div class="box bottom">
               <ion-item class="textoBar" lines="none">
                 <ion-label>{{bar.nombre}}</ion-label>
@@ -55,7 +55,7 @@
           </div>
 
 
-          <div (click)="cambiarTarjeta(bar.numeroBar,$event)" class="fakeFoto">
+          <div (click)="cambiarTarjeta(bar)" class="fakeFoto">
 
 
             <ion-label class="etiquetasReverso">{{bar.nombre}}</ion-label>

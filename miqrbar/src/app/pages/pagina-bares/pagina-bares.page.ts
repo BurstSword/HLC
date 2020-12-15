@@ -7,6 +7,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Storage } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { Bar } from 'src/app/interfaces/interfaces';
 
 @Component({
   selector: 'app-pagina-bares',
@@ -72,13 +73,8 @@ export class PaginaBaresPage implements OnInit {
       
   }
 
-   cambiarTarjeta(numeroBar: number, event: Event) {
-    
-    if (event.target != document.getElementById("botonEditar")) {
-      this.bares[numeroBar].pulsado=!this.bares[numeroBar].pulsado;
-    }
-
-
+   cambiarTarjeta(bar:Bar) {
+      bar.pulsado=!bar.pulsado;
   } 
 
   escanearCarta():void {
