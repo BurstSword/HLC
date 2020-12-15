@@ -18,42 +18,11 @@ export class PaginaBaresPage implements OnInit {
   constructor(private modalController: ModalController, private barcodeScanner: BarcodeScanner, private iab: InAppBrowser,private storage: Storage, private geolocation: Geolocation, public alertController: AlertController,private socialSharing:SocialSharing) { }
   public haybares: boolean;
   public bares: Bar[] = [
-     {
-      nombre: "Nombre generico",
-      foto: "https://www.thoughtco.com/thmb/Yg92CRBhQ66tEoyks18uy94y9qc=/1500x1000/filters:fill(auto,1)/french-bar-58c2365f5f9b58af5ce3fe9c.jpg",
-      descripcion: " Hola loco",
-      valoracion: 0,
-      numeroBar: 0,
-      url: "https://www.google.es/",
-      pulsado: false,
-      localizacion:"holi"
-    },
-    {
-      nombre: "Nombre generico",
-      foto: "https://www.thoughtco.com/thmb/Yg92CRBhQ66tEoyks18uy94y9qc=/1500x1000/filters:fill(auto,1)/french-bar-58c2365f5f9b58af5ce3fe9c.jpg",
-      descripcion: " Hola loco",
-      valoracion: 0,
-      numeroBar: 1,
-      url: "url",
-      pulsado: false,
-      localizacion :"holi"
-    },
-    {
-      nombre: "Nombre generico",
-      foto: "https://www.thoughtco.com/thmb/Yg92CRBhQ66tEoyks18uy94y9qc=/1500x1000/filters:fill(auto,1)/french-bar-58c2365f5f9b58af5ce3fe9c.jpg",
-      descripcion: " Hola loco",
-      valoracion: 0,
-      numeroBar: 2,
-      url: "url",
-      pulsado: false,
-      localizacion :"holi"
-    }, 
+     
     
   ];
   ngOnInit() {
-    /*this.cargarBares();
-       this.bares=[];
-    this.guardarBares(); */ 
+    this.cargarBares(); 
   }
 
   async mostrarModal(bar: Bar) {
@@ -163,27 +132,29 @@ export class PaginaBaresPage implements OnInit {
      });
     return '';
   };
-  async confirmarEliminacion() {
+  async confirmarEliminacion(bar :Bar) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'Confirm!',
-      message: 'Message <strong>text</strong>!!!',
+      header: '',
+      message: '¿Estás seguro que deseas eliminarlo?',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
-          cssClass: 'secondary',
           handler: (blah) => {
-            console.log('Confirm Cancel: blah');
+            
           }
         }, {
-          text: 'Okay',
+          text: 'Eliminar',
+          cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Okay');
+            this.eliminarBar(bar);
           }
         }
       ]
     });
+
+    await alert.present();
   }
 
   compartir(bar:Bar){

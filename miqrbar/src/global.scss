@@ -53,10 +53,11 @@ ion-card {
     color: green !important;
 }
 .tarjetasDeslizantes {
-    width: 110% !important;
-    margin-left: -5% !important;
-    margin-right: auto !important;
+    /* width: 110% !important;
+     margin-left: -5% !important;
+     margin-right: auto !important; 
     border-radius: 8px !important;
+    border: 0px !important; */
 }
 .tarjetaReverso {
     display: flex;
@@ -66,6 +67,7 @@ ion-card {
     margin-right: auto !important;
     background-color: white;
     border-radius: 8px !important;
+    border: 0px !important;
 }
 .enlaceGPS {
     width: 30%;
@@ -93,17 +95,17 @@ ion-card {
     ) !important;
 }
 
-.iconoIr {
+ .iconoIr {
     margin-left: 9% !important;
     margin-right: -10%;
-}
+} 
 
 .tarjetaBar {
     display: flex;
     flex-direction: column;
     width: 90% !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+     margin-left: auto !important;
+    margin-right: auto !important; 
     background-color: white;
     border-radius: 8px !important;
 }
@@ -128,25 +130,44 @@ ion-content {
     padding-inline-start: 0px;
     padding-inline-end: 0px;
 }
+.secondary{
+    color:red !important;
+}
+.botonGuardar{
+    position: fixed;
+    bottom: 5%;
+    width: 80%;
+    left: 10%;
+    right: 10%;
+    --background: linear-gradient(
+        180deg,
+        rgba(93, 190, 195, 1) 0%,
+        rgba(63, 128, 134, 1) 44%,
+        rgba(53, 104, 110, 1) 70%
+    ) !important;
+}
 .entradaDato {
-    margin-bottom: 8% !important;
+    border:none !important;
+    border-bottom: 1px solid gray !important;
+    /* padding: 5px 5px !important; */
+    outline: none !important;
 }
 .headerModal {
     background-color: white;
 }
-ion-input {
-    border: black solid 1px !important;
-}
+
 .valoracion {
     margin-right: 35%;
 }
 .valoracion2 {
     margin-top: 3% !important;
-    margin-bottom: 3%;
 }
 .editarReverso {
-    margin-right: 5.4%;
-    margin-bottom: 2.7%;
+    margin-right: 5.6%;
+    margin-top: 2%;
+}
+.separacionModal{
+margin-top: 5%;
 }
 .listaReverso {
     margin-bottom: -3%;
@@ -157,9 +178,6 @@ ion-input {
 .nombreBar {
     height: 50px;
     overflow: hidden;
-}
-.opcionesSlider{
-    margin-right: 2.7%;
 }
 .etiquetasReverso{
     margin-left: 5%;

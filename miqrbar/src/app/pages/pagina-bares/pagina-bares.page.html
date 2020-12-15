@@ -74,9 +74,7 @@
 
 
           </div>
-          <!-- <ion-button (click)="eliminarBar(bar)" expand="block" shape="round">
-                  Click me
-                </ion-button> -->
+          
         </ion-card>
       </ion-item>
       <ion-item-options class="opcionesSlider" side="end">
@@ -84,7 +82,7 @@
           <fa-icon class="iconoCompartir" icon="share-alt" color="danger"></fa-icon>
         </ion-item-option>
         <ion-item-option color="none">
-          <fa-icon class="iconoBasura" icon="trash" (click)="confirmarEliminacion()"></fa-icon>
+          <fa-icon class="iconoBasura" icon="trash" (click)="confirmarEliminacion(bar)"></fa-icon>
         </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
