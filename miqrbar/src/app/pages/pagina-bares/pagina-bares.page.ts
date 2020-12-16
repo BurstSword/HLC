@@ -16,28 +16,28 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 })
 export class PaginaBaresPage implements OnInit {
 
-  constructor(private modalController: ModalController, private barcodeScanner: BarcodeScanner, private iab: InAppBrowser,private storage: Storage, private geolocation: Geolocation, public alertController: AlertController,private socialSharing:SocialSharing) { }
+  constructor(private modalController: ModalController, private barcodeScanner: BarcodeScanner, private iab: InAppBrowser, private storage: Storage, private geolocation: Geolocation, public alertController: AlertController, private socialSharing: SocialSharing) { }
   public noHayBares: boolean;
   public bares: Bar[] = [
   ];
 
 
   ngOnInit() {
-    this.cargarBares(); 
-    if(this.bares==[]){
-      this.noHayBares=true;
-    }else{
-      this.noHayBares=false;
+    this.cargarBares();
+    if (this.bares == []) {
+      this.noHayBares = true;
+    } else {
+      this.noHayBares = false;
     }
   }
 
   async mostrarModal(bar: Bar) {
-    let newBar ={... bar}
+    let newBar = { ...bar }
     const modal = await this.modalController.create({
       component: ModalBarPage,
       cssClass: 'my-custom-modal-css',
       componentProps: {
-          newBar
+        newBar
       }
     })
     await modal.present();
@@ -58,72 +58,72 @@ export class PaginaBaresPage implements OnInit {
 
   mostrarInAppBrowser(url: string) {
 
-    if(url=""){
-      
+    if (url = "") {
+
     }
     this.iab.create(url, "_blank", {
       location: "yes",
     });
   }
 
-  crearBar(url: string, geolocalizacion:string) {
-      this.mostrarInAppBrowser(url);
-      this.bares.push({
-        nombre: "Nombre generico",
-        foto: "https://www.thoughtco.com/thmb/Yg92CRBhQ66tEoyks18uy94y9qc=/1500x1000/filters:fill(auto,1)/french-bar-58c2365f5f9b58af5ce3fe9c.jpg",
-        descripcion: "",
-        valoracion: 0,
-        numeroBar: this.bares.length,
-        url: url,
-        pulsado: false,
-        localizacion: geolocalizacion,
-      });
-      this.guardarBares();
-      
+  crearBar(url: string, geolocalizacion: string) {
+    this.mostrarInAppBrowser(url);
+    this.bares.push({
+      nombre: "Nombre generico",
+      foto: "https://www.thoughtco.com/thmb/Yg92CRBhQ66tEoyks18uy94y9qc=/1500x1000/filters:fill(auto,1)/french-bar-58c2365f5f9b58af5ce3fe9c.jpg",
+      descripcion: "",
+      valoracion: 0,
+      numeroBar: this.bares.length,
+      url: url,
+      pulsado: false,
+      localizacion: geolocalizacion,
+    });
+    this.guardarBares();
+
   }
 
-   cambiarTarjeta(bar:Bar) {
-      bar.pulsado=!bar.pulsado;
-  } 
+  cambiarTarjeta(bar: Bar) {
+    bar.pulsado = !bar.pulsado;
+  }
 
-  escanearCarta():void {
+  escanearCarta(): void {
     this.barcodeScanner.scan().then(barcodeData => {
       console.log(barcodeData.text);
-      if(barcodeData.text!=""){
+      if (barcodeData.text != "") {
         const geo = this.crearGeolocalizacion();
-        this.crearBar(barcodeData.text,geo);
+        this.crearBar(barcodeData.text, geo);
       }
-     
+
     }).catch(err => {
       console.log('Error', err);
     });
   }
-  
-  guardarBares():void{
+
+  guardarBares(): void {
     this.storage.set('bares', this.bares);
   }
 
-  cargarBares(){
-    this.storage.get('bares').then(bares=>{
-      if(bares!=null){
-        this.bares=bares;
-        this.noHayBares=true;
+  cargarBares() {
+    this.storage.get('bares').then(bares => {
+      if (bares != null) {
+        this.bares = bares;
+        this.noHayBares = true;
       }
     })
   }
-  eliminarBar(bar:Bar):void{
-    const index=this.bares.indexOf(bar);
-    if(index>-1){
-      this.bares.splice(index,1);
+  eliminarBar(bar: Bar): void {
+    const index = this.bares.indexOf(bar);
+    if (index > -1) {
+      this.bares.splice(index, 1);
     }
     this.guardarBares();
-    if(this.bares=[]){
-      this.noHayBares=false;
-    }else{
-      this.noHayBares=true;
+    if (this.bares = []) {
+      this.noHayBares = false;
+    } else {
+      this.noHayBares = true;
     }
   }
-  
+
   crearGeolocalizacion(): string {
 
     this.geolocation.getCurrentPosition().then((resp) => {
@@ -139,10 +139,10 @@ export class PaginaBaresPage implements OnInit {
 
     }).catch((err) => {
 
-     });
+    });
     return '';
   };
-  async confirmarEliminacion(bar :Bar) {
+  async confirmarEliminacion(bar: Bar) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: '',
@@ -152,7 +152,7 @@ export class PaginaBaresPage implements OnInit {
           text: 'Cancelar',
           role: 'cancel',
           handler: (blah) => {
-            
+
           }
         }, {
           text: 'Eliminar',
@@ -167,7 +167,7 @@ export class PaginaBaresPage implements OnInit {
     await alert.present();
   }
 
-  compartir(bar:Bar){
-    this.socialSharing.share("Seguro que te gusta " + bar.nombre, bar.descripcion,"", bar.url)
+  compartir(bar: Bar) {
+    this.socialSharing.share("Seguro que te gusta " + bar.nombre, bar.descripcion, "", bar.url)
   }
 }
