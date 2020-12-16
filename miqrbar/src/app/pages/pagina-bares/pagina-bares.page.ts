@@ -7,7 +7,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Storage } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-import { Bar } from 'src/app/interfaces/interfaces';
+
 
 @Component({
   selector: 'app-pagina-bares',
@@ -17,13 +17,18 @@ import { Bar } from 'src/app/interfaces/interfaces';
 export class PaginaBaresPage implements OnInit {
 
   constructor(private modalController: ModalController, private barcodeScanner: BarcodeScanner, private iab: InAppBrowser,private storage: Storage, private geolocation: Geolocation, public alertController: AlertController,private socialSharing:SocialSharing) { }
-  public haybares: boolean;
+  public noHayBares: boolean;
   public bares: Bar[] = [
-     
-    
   ];
+
+
   ngOnInit() {
     this.cargarBares(); 
+    if(this.bares==[]){
+      this.noHayBares=true;
+    }else{
+      this.noHayBares=false;
+    }
   }
 
   async mostrarModal(bar: Bar) {
@@ -52,6 +57,10 @@ export class PaginaBaresPage implements OnInit {
   }
 
   mostrarInAppBrowser(url: string) {
+
+    if(url=""){
+      
+    }
     this.iab.create(url, "_blank", {
       location: "yes",
     });
@@ -98,7 +107,7 @@ export class PaginaBaresPage implements OnInit {
     this.storage.get('bares').then(bares=>{
       if(bares!=null){
         this.bares=bares;
-        this.haybares=true;
+        this.noHayBares=true;
       }
     })
   }
@@ -108,6 +117,11 @@ export class PaginaBaresPage implements OnInit {
       this.bares.splice(index,1);
     }
     this.guardarBares();
+    if(this.bares=[]){
+      this.noHayBares=false;
+    }else{
+      this.noHayBares=true;
+    }
   }
   
   crearGeolocalizacion(): string {

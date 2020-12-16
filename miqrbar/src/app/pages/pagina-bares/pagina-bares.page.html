@@ -5,8 +5,6 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ion-label *ngIf="!haybares">No hay bares churrita</ion-label>  -->
-
   <ion-list *ngFor="let bar of bares">
 
     <ion-item-sliding class="tarjetasDeslizantes">
@@ -65,16 +63,16 @@
             </ion-label>
 
             <ion-label class="etiquetasReverso" maxlength="32">{{bar.descripcion}}</ion-label>
-            <ion-item class="cartaItem"  lines="none">
+            <ion-item class="cartaItem" lines="none">
               <ion-label class="colorApp" (click)="mostrarInAppBrowser(bar.url)">Ver carta</ion-label>
-              <ion-button class="colorApp"  class="editarReverso" fill="none" slot="end" (click)="mostrarModal(bar)">
+              <ion-button class="colorApp" class="editarReverso" fill="none" slot="end" (click)="mostrarModal(bar)">
                 <fa-icon icon="pen"></fa-icon>
               </ion-button>
             </ion-item>
 
 
           </div>
-          
+
         </ion-card>
       </ion-item>
       <ion-item-options class="opcionesSlider" side="end">
