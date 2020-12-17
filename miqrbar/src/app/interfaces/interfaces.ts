@@ -6,5 +6,5 @@ export interface Bar{
     numeroBar:number,
     url:string,
     pulsado:boolean,
-    localizacion:string
+    localizacion:string,
 }

@@ -59,11 +59,17 @@ export class PaginaBaresPage implements OnInit {
   mostrarInAppBrowser(url: string) {
 
     if (url = "") {
-
+      this.noLocalizacion();
+    } else {
+      this.iab.create(url, "_blank", {
+        location: "yes",
+      });
     }
-    this.iab.create(url, "_blank", {
-      location: "yes",
-    });
+
+  }
+
+  abrirGeo(bar:Bar){
+    window.open("geo:"+bar.localizacion);
   }
 
   crearBar(url: string, geolocalizacion: string) {
@@ -129,9 +135,9 @@ export class PaginaBaresPage implements OnInit {
     this.geolocation.getCurrentPosition().then((resp) => {
 
       if (resp.coords.accuracy < 50) {
-        const latitud = resp.coords.latitude
-        const longitud = resp.coords.longitude
-        const localizacion = `https://maps.google.com/maps?z=25&t=m&q=loc:${latitud}+${longitud}`
+        const latitud = resp.coords.latitude;
+        const longitud = resp.coords.longitude;
+        const localizacion = latitud+","+longitud;
 
         return localizacion;
 
@@ -169,5 +175,16 @@ export class PaginaBaresPage implements OnInit {
 
   compartir(bar: Bar) {
     this.socialSharing.share("Seguro que te gusta " + bar.nombre, bar.descripcion, "", bar.url)
+  }
+
+  async noLocalizacion() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Localización',
+      message: 'No hay localización disponible',
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 }

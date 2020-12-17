@@ -12,7 +12,7 @@
         <div id="tarjetaDelantera">
           <ion-card class="tarjetaBar" *ngIf="!bar.pulsado">
 
-            <div (click)="mostrarInAppBrowser(bar.localizacion)" class="enlaceGPS">
+            <div (click)="abrirGeo(bar)" class="enlaceGPS">
               <div class="textoEnlaceGPS">
                 <ion-label>Ir al sitio <fa-icon class="iconoIr" icon="map-marked-alt"></fa-icon>
                 </ion-label>
@@ -45,7 +45,7 @@
 
         <ion-card class="tarjetaReverso" *ngIf="bar.pulsado">
 
-          <div (click)="mostrarInAppBrowser(bar.localizacion)" class="enlaceGPS">
+          <div (click)="abrirGeo(bar)" class="enlaceGPS">
             <div class="textoEnlaceGPS">
               <ion-label>Ir al sitio <fa-icon class="iconoIr" icon="map-marked-alt"></fa-icon>
               </ion-label>
