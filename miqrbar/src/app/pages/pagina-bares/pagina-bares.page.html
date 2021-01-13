@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title class="textoBar">Bares Guardados</ion-title>
+    <ion-button slot="end" fill="none" (click)="actionSheetOrdenar()">
+      <fa-icon icon="sort-amount-up"></fa-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -79,8 +82,8 @@
         <ion-item-option color="none" (click)="compartir(bar)">
           <fa-icon class="iconoCompartir" icon="share-alt" color="danger"></fa-icon>
         </ion-item-option>
-        <ion-item-option color="none">
-          <fa-icon class="iconoBasura" icon="trash" (click)="confirmarEliminacion(bar)"></fa-icon>
+        <ion-item-option color="none" (click)="confirmarEliminacion(bar)">
+          <fa-icon class="iconoBasura" icon="trash"></fa-icon>
         </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>

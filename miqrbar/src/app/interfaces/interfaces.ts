@@ -7,4 +7,5 @@ export interface Bar{
     url:string,
     pulsado:boolean,
     localizacion:string,
+    distancia:number
 }

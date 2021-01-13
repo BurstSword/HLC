@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { ActionSheetController, AlertController, ModalController } from '@ionic/angular';
 import { Bar } from '../../interfaces/interfaces';
 import { ModalBarPage } from '../modal-bar/modal-bar.page';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Storage } from '@ionic/storage';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Plugins } from '@capacitor/core';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+
 
 
 @Component({
@@ -16,10 +17,11 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 })
 export class PaginaBaresPage implements OnInit {
 
-  constructor(private modalController: ModalController, private barcodeScanner: BarcodeScanner, private iab: InAppBrowser, private storage: Storage, private geolocation: Geolocation, public alertController: AlertController, private socialSharing: SocialSharing) { }
+  constructor(private modalController: ModalController, private barcodeScanner: BarcodeScanner, private iab: InAppBrowser, private storage: Storage,  public alertController: AlertController, private socialSharing: SocialSharing, private actionSheetController: ActionSheetController) { }
   public noHayBares: boolean;
   public bares: Bar[] = [
   ];
+  public localizacion;
 
 
   ngOnInit() {
@@ -58,31 +60,31 @@ export class PaginaBaresPage implements OnInit {
 
   mostrarInAppBrowser(url: string) {
 
-    if (url = "") {
-      this.noLocalizacion();
-    } else {
-      this.iab.create(url, "_blank", {
-        location: "yes",
-      });
-    }
+
+    this.iab.create(url, "_blank", {
+      location: "yes",
+    });
+
 
   }
 
-  abrirGeo(bar:Bar){
-    window.open("geo:"+bar.localizacion);
+  abrirGeo(bar: Bar) {
+    window.open('geo:0,0?q=' + bar.localizacion, '_system');
   }
 
   crearBar(url: string, geolocalizacion: string) {
+    console.log(geolocalizacion+" creación del bar");
     this.mostrarInAppBrowser(url);
-    this.bares.push({
-      nombre: "Nombre generico",
+    this.bares.unshift({
+      nombre: "Nombre",
       foto: "https://www.thoughtco.com/thmb/Yg92CRBhQ66tEoyks18uy94y9qc=/1500x1000/filters:fill(auto,1)/french-bar-58c2365f5f9b58af5ce3fe9c.jpg",
-      descripcion: "",
+      descripcion: "Esto es una descripción",
       valoracion: 0,
       numeroBar: this.bares.length,
       url: url,
       pulsado: false,
       localizacion: geolocalizacion,
+      distancia: 0
     });
     this.guardarBares();
 
@@ -92,18 +94,7 @@ export class PaginaBaresPage implements OnInit {
     bar.pulsado = !bar.pulsado;
   }
 
-  escanearCarta(): void {
-    this.barcodeScanner.scan().then(barcodeData => {
-      console.log(barcodeData.text);
-      if (barcodeData.text != "") {
-        const geo = this.crearGeolocalizacion();
-        this.crearBar(barcodeData.text, geo);
-      }
-
-    }).catch(err => {
-      console.log('Error', err);
-    });
-  }
+  
 
   guardarBares(): void {
     this.storage.set('bares', this.bares);
@@ -123,7 +114,7 @@ export class PaginaBaresPage implements OnInit {
       this.bares.splice(index, 1);
     }
     this.guardarBares();
-    if (this.bares = []) {
+    if (this.bares == []) {
       this.noHayBares = false;
     } else {
       this.noHayBares = true;
@@ -131,23 +122,45 @@ export class PaginaBaresPage implements OnInit {
   }
 
   crearGeolocalizacion(): string {
+    const {Geolocation} = Plugins;
+    
+    Geolocation.getCurrentPosition().then((resp) => {
+      
 
-    this.geolocation.getCurrentPosition().then((resp) => {
-
-      if (resp.coords.accuracy < 50) {
+      if(resp.coords.accuracy<50){
         const latitud = resp.coords.latitude;
         const longitud = resp.coords.longitude;
-        const localizacion = latitud+","+longitud;
+        this.localizacion = latitud + "," + longitud;
+        
+        console.log(this.localizacion+" creación de las coordenadas");
+        
+      }
+      
 
-        return localizacion;
+    }).catch((err) => {
+      
+    });
+    return this.localizacion;
+  };
+
+  escanearCarta(): void {
+    this.barcodeScanner.scan().then(barcodeData => {
+      console.log(barcodeData.text);
+      if (this.bares.some(elem => elem.url === barcodeData.text)) {
+        this.yaExiste();
+      } else {
+        if (barcodeData.text != "") {
+          const geo = this.crearGeolocalizacion();
+          console.log(geo);
+          this.crearBar(barcodeData.text, geo);
+        }
 
       }
 
-    }).catch((err) => {
-
+    }).catch(err => {
+      console.log('Error', err);
     });
-    return '';
-  };
+  }
   async confirmarEliminacion(bar: Bar) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
@@ -177,14 +190,83 @@ export class PaginaBaresPage implements OnInit {
     this.socialSharing.share("Seguro que te gusta " + bar.nombre, bar.descripcion, "", bar.url)
   }
 
-  async noLocalizacion() {
+  async yaExiste() {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Localización',
-      message: 'No hay localización disponible',
+      header: 'Bares',
+      message: 'Este bar ya está registrado',
       buttons: ['OK']
     });
 
     await alert.present();
+  }
+
+  async actionSheetOrdenar() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Ordenar',
+      buttons: [{
+        text: 'Valoracion',
+        icon: 'star',
+        handler: () => {
+          this.ordenarPorValoracion();
+        }
+      }, {
+        text: 'Nombre',
+        icon: 'Text',
+        handler: () => {
+
+        }
+      }, {
+        text: 'Distancia',
+        icon: 'pin-outline',
+        handler: () => {
+          this.calcularDistancia();
+        }
+      },]
+    });
+    await actionSheet.present();
+  }
+
+  ordenarPorValoracion() {
+    this.bares.sort((a, b) => b.valoracion - a.valoracion);
+    this.guardarBares();
+  }
+
+  ordenarPorNombre() {
+    this.bares.sort((a, b) => b.valoracion - a.valoracion);
+    this.guardarBares();
+  }
+  ordenarPorDistancia() {
+    this.bares.sort((a, b) => a.distancia - b.distancia);
+    this.guardarBares();
+  }
+
+  calcularDistancia() {
+    const geo = this.crearGeolocalizacion();
+    var geoYo = geo.split(",");
+    const lat2 = parseFloat(geoYo[0]);
+    const lon2 = parseFloat(geoYo[1]);
+
+    for (let index = 0; index < this.bares.length; index++) {
+      var geoBares = this.bares[index].localizacion.split(",");
+      var lat1 = parseFloat(geoBares[0]);
+      var lon1 = parseFloat(geoBares[1]);
+      var R = 6371; // Radius of the earth in km
+      var dLat = this.deg2rad(lat2 - lat1);  // deg2rad below
+      var dLon = this.deg2rad(lon2 - lon1);
+      var a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      var d = R * c; // Distance in km
+      this.bares[index].distancia = d;
+    }
+
+    this.ordenarPorDistancia();
+
+  }
+
+  deg2rad(deg) {
+    return deg * (Math.PI / 180)
   }
 }

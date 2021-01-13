@@ -11,34 +11,34 @@
 
 <ion-content>
   <ion-list inset>
-    
-      <ion-label>Nombre del bar </ion-label>
-      <ion-input class="entradaDato" [(ngModel)]="newBar.nombre" type="text"></ion-input>
-    
+
+    <ion-label>Nombre del bar </ion-label>
+    <ion-input class="entradaDato" [(ngModel)]="newBar.nombre" type="text"></ion-input>
+
     <div class="separacionModal">
       <ion-label>Valoración: {{newBar.valoracion}}</ion-label>
-       <ion-range class="barraValoracion" min="0" max="5" dualKnobs="false" pin="true" snaps="false" step="0.1" ticks="true"
-        [(ngModel)]="newBar.valoracion" color="danger" (ngModelChange)="ratingFilter($event)">
+      <ion-range class="barraValoracion" min="0" max="5" dualKnobs="false" pin="true" snaps="false" step="0.1"
+        ticks="true" [(ngModel)]="newBar.valoracion" color="danger" (ngModelChange)="ratingFilter($event)">
         <ion-icon size="small" slot="start" name="star"></ion-icon>
         <ion-icon slot="end" name="star"></ion-icon>
-      </ion-range> 
+      </ion-range>
     </div>
     <div class="separacionModal">
       <ion-label>Descripción: </ion-label>
       <ion-input class="entradaDato" maxlength="32" type="text" [(ngModel)]="newBar.descripcion"></ion-input>
-   </div>
-   <div class="separacionModal">
-      <ion-label>Coordenadas </ion-label>
-      <ion-input class="entradaDato" [(ngModel)]="newBar.localizacion" type="text"></ion-input>
-</div>
-<div class="separacionModal">
-      <ion-label>Carta </ion-label>
-      <ion-input class="entradaDato" [(ngModel)]="newBar.url" type="text"></ion-input>
-      </div>
+    </div>
+    <div class="separacionModal">
+      <ion-label>Coordenadas: </ion-label>
+      <ion-input class="entradaDato" readonly [(ngModel)]="newBar.localizacion" type="text"></ion-input>
+    </div>
+    <div class="separacionModal">
+      <ion-label>Carta: </ion-label>
+      <ion-input class="entradaDato" readonly [(ngModel)]="newBar.url" type="text"></ion-input>
+    </div>
   </ion-list>
 
   <ion-button class="botonGuardar" expand="full" (click)="modificar()" shape="round">
     Guardar
   </ion-button>
-  
+
 </ion-content>
