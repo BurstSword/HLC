@@ -7,6 +7,7 @@ export class Server {
     constructor() {
         this.app = express();
     }
+    
 
     start(data: () => void) {
         this.app.listen(this.port, data)

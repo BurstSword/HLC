@@ -7,7 +7,7 @@
           <ion-grid>
               <ion-row>
                   <ion-col>
-                      <h1>Iniciar Sesión</h1>
+                      <h1>Registro</h1>
                   </ion-col>
               </ion-row>
               <ion-row>
@@ -23,23 +23,23 @@
                               <ion-icon name="lock-closed-outline" class="icon-login"></ion-icon>
                               <ion-input name="password" type="password" required placeholder="Contraseña"></ion-input>
                           </ion-item>
-  
+                          <br />
+                          <ion-item>
+                            <ion-icon name="mail" class="icon-login"></ion-icon>
+                            <ion-input name="mail" type="text" required placeholder="Correo"></ion-input>
+                        </ion-item>
                       </ion-list>
                   </ion-col>
               </ion-row>
               <ion-row>
                   <ion-col>
-                      <ion-button routerLink="/inicio" type="submit" fill="solid" color="none" expand="full" class="btnLog">
-                          Entrar
+                      <ion-button routerLink="/login" type="submit" fill="solid" expand="full" color="none" class="btnLog">
+                          Registro
                       </ion-button>
                   </ion-col>
               </ion-row>
               <ion-row>
                   <ion-col>
-                      <ion-label>
-                          <h3>¿Olvidó la contraseña?</h3>
-                          <h3><a routerLink="/registro">Registro</a></h3>
-                      </ion-label>
                   </ion-col>
               </ion-row>
           </ion-grid>
