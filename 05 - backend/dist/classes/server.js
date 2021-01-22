@@ -7,7 +7,7 @@ exports.Server = void 0;
 const express_1 = __importDefault(require("express"));
 class Server {
     constructor() {
-        this.port = 7564;
+        this.port = 3300;
         this.app = express_1.default();
     }
     start(data) {
