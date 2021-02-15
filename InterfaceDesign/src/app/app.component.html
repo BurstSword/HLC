@@ -1,20 +1,9 @@
 <ion-app>
-  <ion-menu autohide="true" side="start" menuId="menuPrincipal" contentId="main">
-    <ion-header>
-      <ion-toolbar color="primary">
-        <ion-title>Menú Tienda</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
-      <ion-list>
-        <ion-item  routerLink="/home"><ion-icon slot="start" name="card-outline"></ion-icon><ion-label >Tienda</ion-label></ion-item>
-        <ion-item  routerLink="/foro"><ion-icon slot="start" name="people-outline"></ion-icon><ion-label>Foro</ion-label></ion-item>
-        <ion-item routerLink="/cart"><ion-icon slot="start" name="cart-outline"></ion-icon><ion-label>Carrito</ion-label></ion-item>
-        <ion-item  routerLink="/contacto"><ion-icon slot="start" name="document-text-outline"></ion-icon><ion-label>Contacto</ion-label></ion-item>
-        <ion-item  routerLink="/login"><ion-icon slot="start" color="danger" name="log-out-outline"></ion-icon><ion-label color="danger">Logout</ion-label></ion-item>
-      </ion-list>
-    </ion-content>
-  </ion-menu>
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <!-- Popper.JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
   <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>
