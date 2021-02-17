@@ -13,9 +13,20 @@ export class UsuariosService {
     
   }
 
-  getSaludo(){
+  registro(data:any){
     return new Promise<any>(resolve=>{
-      this._http.get<any>(environment.urlUsuario+"getGreeting").subscribe(resp=>{
+      this._http.get<any>(environment.urlUsuario+"registro").subscribe(resp=>{
+        console.log(resp);
+        resolve(resp);
+        
+      });
+    });
+    
+  }
+
+  login(data:any){
+    return new Promise<any>(resolve=>{
+      this._http.get<any>(environment.urlUsuario+"login").subscribe(resp=>{
         console.log(resp);
         resolve(resp);
         

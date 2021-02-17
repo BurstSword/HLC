@@ -16,24 +16,28 @@
   
                           <ion-item>
                               <ion-icon name="person" class="icon-login"></ion-icon>
-                              <ion-input name="user" type="text" required placeholder="Usuario"></ion-input>
+                              <ion-input [(ngModel)]="nombre" name="user" type="text" required placeholder="Usuario"></ion-input>
                           </ion-item>
                           <br />
                           <ion-item>
                               <ion-icon name="lock-closed-outline" class="icon-login"></ion-icon>
-                              <ion-input name="password" type="password" required placeholder="Contraseña"></ion-input>
+                              <ion-input [(ngModel)]="password" name="password" type="password" required placeholder="Contraseña"></ion-input>
                           </ion-item>
                           <br />
                           <ion-item>
                             <ion-icon name="mail" class="icon-login"></ion-icon>
-                            <ion-input name="mail" type="text" required placeholder="Correo"></ion-input>
+                            <ion-input [(ngModel)]="email" name="mail" type="text" required placeholder="Correo"></ion-input>
+                        </ion-item>
+                        <br />
+                          <ion-item>
+                            <ion-input [(ngModel)]="edad" name="mail" type="text" required placeholder="Edad"></ion-input>
                         </ion-item>
                       </ion-list>
                   </ion-col>
               </ion-row>
               <ion-row>
                   <ion-col>
-                      <ion-button routerLink="/login" type="submit" fill="solid" expand="full" color="none" class="btnLog">
+                      <ion-button (click)="registro()" type="submit" fill="solid" expand="full" color="none" class="btnLog">
                           Registro
                       </ion-button>
                   </ion-col>

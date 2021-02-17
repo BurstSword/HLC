@@ -3,6 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //nos creamos una clase para no tenerlo en el archivo usuario.rutas.ts
 // en ese solo llamariamos a esta función
 class userController {
+    registro(req, res) {
+        const params = req.body;
+    }
     getGreeting(req, res) {
         // aquí haría el proceso para que el usuario pueda hacer lo que quiera
         // solo redirige

@@ -9,12 +9,19 @@ import { UsuariosService } from '../../services/usuarios.service';
 export class LoginPage implements OnInit {
 
   constructor(private usuariosService : UsuariosService) { }
-
+  public usuario: string;
+  public password: string;
   ngOnInit() {
   }
 
-  pruebaServidor(){
-    const repuesta = this.usuariosService.getSaludo();
+  async login(){
+    const datos={
+      usuario:this.usuario,
+      password:this.password
+    }
+
+    const resultado = await this.usuariosService.login(datos);
+    console.log(resultado);
   }
   
 }
