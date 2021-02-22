@@ -1,0 +1,16 @@
+.nav-item a:hover {
+    color: #ffa012;
+}
+
+.btn-color {
+    background-color: #FFC312;
+    color: black;
+}
+
+.btn-color:hover {
+    background-color: #ffa012;
+}
+
+.borderBuscar{
+    border-color: #ffa012 ;
+}

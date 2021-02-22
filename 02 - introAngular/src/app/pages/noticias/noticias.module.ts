@@ -11,7 +11,7 @@ import { PipesModule } from 'app/pipes/pipes.module';
   imports: [
     CommonModule,
     NoticiasRoutingModule,
-    PipesModule
+    PipesModule,
   ]
 })
 export class NoticiasModule { }

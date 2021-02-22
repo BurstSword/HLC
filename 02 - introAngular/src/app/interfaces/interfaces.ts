@@ -19,3 +19,10 @@
     id?: string;
     name: string;
   }
+
+  export interface Persona{
+    foto:string,
+    nombre:string,
+    description:string,
+    longDescription:string
+  }

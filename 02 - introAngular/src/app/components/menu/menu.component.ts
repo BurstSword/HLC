@@ -19,13 +19,17 @@ export class MenuComponent implements OnInit {
 
     },
     {
-      nombre: "Sugerencias",
-      ruta: "sugerencias"
+      nombre: "Acceso Periodista",
+      ruta: "acceso"
     },
     {
-      nombre: "Articulos",
-      ruta: "articulos"
-    }
+      nombre: "Añadir noticia",
+      ruta: "crear"
+    },
+    {
+      nombre: "Nosotros",
+      ruta: "reporteros"
+    },
   ];
 
   constructor() { }
