@@ -1,58 +1,82 @@
 <ion-content>
 
-  
-  <div class="fondoPantalla">
-  <ion-slide>
-      <div class="container-login">
-          <ion-grid>
-              <ion-row>
-                  <ion-col>
-                      <h1>Registro</h1>
-                  </ion-col>
-              </ion-row>
-              <ion-row>
-                  <ion-col>
-                      <ion-list>
-  
-                          <ion-item>
-                              <ion-icon name="person" class="icon-login"></ion-icon>
-                              <ion-input [(ngModel)]="nombre" name="user" type="text" required placeholder="Usuario"></ion-input>
-                          </ion-item>
-                          <br />
-                          <ion-item>
-                              <ion-icon name="lock-closed-outline" class="icon-login"></ion-icon>
-                              <ion-input [(ngModel)]="password" name="password" type="password" required placeholder="Contraseña"></ion-input>
-                          </ion-item>
-                          <br />
-                          <ion-item>
-                            <ion-icon name="mail" class="icon-login"></ion-icon>
-                            <ion-input [(ngModel)]="email" name="mail" type="text" required placeholder="Correo"></ion-input>
-                        </ion-item>
-                        <br />
-                          <ion-item>
-                            <ion-input [(ngModel)]="edad" name="mail" type="text" required placeholder="Edad"></ion-input>
-                        </ion-item>
-                        <br />
-                          <ion-item>
-                            <ion-icon name="number" class="icon-login"></ion-icon>
-                            <ion-input name="age" type="text" required placeholder="Edad"></ion-input>
-                        </ion-item>
-                      </ion-list>
-                  </ion-col>
-              </ion-row>
-              <ion-row>
-                  <ion-col>
-                      <ion-button (click)="registro()" type="submit" fill="solid" expand="full" color="none" class="btnLog">
-                          Registro
-                      </ion-button>
-                  </ion-col>
-              </ion-row>
-              <ion-row>
-                  <ion-col>
-                  </ion-col>
-              </ion-row>
-          </ion-grid>
-      </div>
-      
-  </ion-slide>
-</div>
+
+    <div class="fondoPantalla">
+        <form [formGroup]="registerForm" (ngSubmit)="registro()">
+        <ion-slide>
+            <div class="container-login">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <h1>Registro</h1>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <ion-list>
+
+                                <ion-item>
+                                    <ion-icon name="person" class="icon-login"></ion-icon>
+                                    <ion-input formControlName="nombre" name="user" type="text" required
+                                        placeholder="Usuario"></ion-input>
+                                </ion-item>
+                                <div *ngFor="let error of validationMessages.nombre">
+                                    <ng-container *ngIf="nombre.hasError(error.type) && nombre.touched">
+                                        <small class="errorMessage">{{error.message}}</small>
+                                    </ng-container>
+                                </div>
+                                <br />
+                                <ion-item>
+                                    <ion-icon name="lock-closed-outline" class="icon-login"></ion-icon>
+                                    <ion-input formControlName="password" name="password" type="password" required
+                                        placeholder="Contraseña"></ion-input>
+                                </ion-item>
+                                <div *ngFor="let error of validationMessages.password">
+                                    <ng-container *ngIf="password.hasError(error.type) && password.touched">
+                                        <small class="errorMessage">{{error.message}}</small>
+                                    </ng-container>
+                                </div>
+                                <br />
+                                <ion-item>
+                                    <ion-icon name="mail" class="icon-login"></ion-icon>
+                                    <ion-input formControlName="email" name="email" type="text" required
+                                        placeholder="Correo"></ion-input>
+                                </ion-item>
+                                <div *ngFor="let error of validationMessages.email">
+                                    <ng-container *ngIf="password.hasError(error.type) && password.touched">
+                                        <small class="errorMessage">{{error.message}}</small>
+                                    </ng-container>
+                                </div>
+                                <br />
+                                <ion-item>
+                                    <ion-icon name="mail" class="icon-login"></ion-icon>
+                                    <ion-input formControlName="edad" name="mail" type="text" required placeholder="Edad">
+                                    </ion-input>
+                                </ion-item>
+                                <div *ngFor="let error of validationMessages.edad">
+                                    <ng-container *ngIf="edad.hasError(error.type) && edad.touched">
+                                        <small class="errorMessage">{{error.message}}</small>
+                                    </ng-container>
+                                </div>
+                                <br />
+                            </ion-list>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <ion-button (click)="registro()" type="submit" fill="solid" expand="full" color="none"
+                                class="btnLog">
+                                Registro
+                            </ion-button>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+
+        </ion-slide>
+    </form>
+    </div>

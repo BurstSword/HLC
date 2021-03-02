@@ -1,8 +1,5 @@
-<<<<<<< HEAD
+
 import { Router } from "express";
-=======
-import {Router } from "express";
->>>>>>> main
 import userController from "../controllers/user.controller";
 
 const userRoutes = Router();

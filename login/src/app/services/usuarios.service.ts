@@ -1,37 +1,63 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { Decode, RespuestaPost, Usuario } from '../interfaces/RespuestaPost';
+import jwtDecode from 'jwt-decode';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuariosService {
-  
-  constructor(private _http:HttpClient) { 
-    
+  public usuarioActual: any;
+  constructor(private _http: HttpClient) {
+
   }
 
-  registro(data:any){
-    return new Promise<any>(resolve=>{
-      this._http.get<any>(environment.urlUsuario+"registro").subscribe(resp=>{
-        console.log(resp);
+  registro(data: Usuario) {
+    return new Promise<RespuestaPost>(resolve => {
+      this._http.post<RespuestaPost>(environment.urlUsuario + "usuario/registro", data).subscribe(resp => {
         resolve(resp);
-        
+
       });
     });
-    
+
   }
 
-  login(data:any){
-    return new Promise<any>(resolve=>{
-      this._http.get<any>(environment.urlUsuario+"login").subscribe(resp=>{
-        console.log(resp);
+  login(data: Usuario) {
+    return new Promise<RespuestaPost>(resolve => {
+      this._http.post<RespuestaPost>(environment.urlUsuario + "usuario/login", data).subscribe(resp => {
+        if (resp.status == "ok" && resp.token) {
+          console.log(resp);
+          localStorage.setItem('token', resp.token);
+          localStorage.setItem('usuario',JSON.stringify(resp.usuario));
+        }
         resolve(resp);
-        
       });
     });
-    
+  }
+
+
+  clearStorage(){
+    localStorage.clear();
+  }
+  getToken() {
+    return localStorage.getItem('token');
+
+  }
+
+  compruebaSiLoggado(): boolean {
+    const token = this.getToken()
+    if (!token) return false
+
+    const decoded: Decode = jwtDecode(token)
+    const time = new Date().getTime()
+
+    if (decoded.exp > Math.floor(time / 1000)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

@@ -1,12 +1,38 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="dark">
     <ion-title>Inicio</ion-title>
-    <ion-button color="danger" routerLink="/login" slot="end">
-      Logout
-    </ion-button>
+    <ion-icon name="exit" color="danger" (click)="logout()" style="font-size: 25px;" slot="end">
+    </ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<ion-label></ion-label>
+  <ion-content>
+    <div>
+      <ion-card *ngFor="let event of listaEventos; index as i">
+        <ion-card-header>
+          <ion-icon style="float: right;" name="ellipsis-vertical"  *ngIf="event.idUsuario === user._id" (click)="misEventos(event)"></ion-icon>
+          
+          <ion-icon style="float: right;" name="ellipsis-vertical"  *ngIf="event.idUsuario !== user._id" (click)="opcionesEvento(event)"></ion-icon>
+          <ion-card-title>{{event.nombre}}</ion-card-title>
+          <ion-card-subtitle>{{event.fecha | date:'longDate'}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <h2 *ngIf="event.asistentes.length!=4">Plazas disponibles: <span>{{4-event.asistentes.length}}</span></h2>
+          <h2 style="color: red;" *ngIf="event.asistentes.length==4">Aforo completo</h2>
+          <hr>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  
+  
+  
+  
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="primary" (click)="crearEvento()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  
+  </ion-content>
 </ion-content>

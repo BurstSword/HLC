@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 //nos creamos una clase para no tenerlo en el archivo usuario.rutas.ts
@@ -32,7 +32,7 @@ class userController {
     }
 }
 exports.default = userController;
-=======
+
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_model_1 = require("../models/user.model");
@@ -79,4 +79,4 @@ class userController {
     }
 }
 exports.default = userController;
->>>>>>> main
+

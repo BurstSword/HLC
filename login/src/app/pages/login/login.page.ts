@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UsuariosService } from '../../services/usuarios.service';
 
 @Component({
@@ -8,20 +10,49 @@ import { UsuariosService } from '../../services/usuarios.service';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private usuariosService : UsuariosService) { }
+  constructor(private formBuilder: FormBuilder, private usuariosService: UsuariosService, private router: Router) { }
   public usuario: string;
   public password: string;
-  ngOnInit() {
-  }
-
-  async login(){
-    const datos={
-      usuario:this.usuario,
-      password:this.password
-    }
-
-    const resultado = await this.usuariosService.login(datos);
-    console.log(resultado);
-  }
+  public loginForm: FormGroup;
   
+  ngOnInit() {
+    this.createForm();
+    this.router.navigate(["/inicio"]);
+  }
+
+  async login() {
+    if (this.loginForm.invalid) return
+    const datos = this.loginForm.value;
+    console.log(datos);
+    const resultado = await this.usuariosService.login(datos);
+    if (resultado.status == "ok") {
+      this.loginForm.reset();
+      this.router.navigate(["/inicio"]);
+    }
+  }
+
+  get nombre() {
+    return this.loginForm.get('nombre')
+  }
+  get pwd() {
+    return this.loginForm.get('pwd')
+  }
+
+  createForm() {
+    this.loginForm = this.formBuilder.group({
+      nombre: ['', [Validators.required, Validators.maxLength(255)]],
+      pwd: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(255)]]
+    })
+  }
+
+  validationMessages = {
+    'nombre': [
+      { type: 'maxlength', message: 'Max length of 255 characters' },
+    ],
+    'pwd': [
+      { type: 'required', message: 'Password required' },
+      { type: 'minlength', message: 'Min length of 8 characters' },
+      { type: 'maxlength', message: 'Max length of 255 characters' }
+    ]
+  }
 }
