@@ -29,7 +29,6 @@ export class UsuariosService {
     return new Promise<RespuestaPost>(resolve => {
       this._http.post<RespuestaPost>(environment.urlUsuario + "usuario/login", data).subscribe(resp => {
         if (resp.status == "ok" && resp.token) {
-          console.log(resp);
           localStorage.setItem('token', resp.token);
           localStorage.setItem('usuario',JSON.stringify(resp.usuario));
         }

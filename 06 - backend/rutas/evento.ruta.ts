@@ -7,3 +7,4 @@ export const rutaEventos = Router();
 rutaEventos.post('/crear', autenticacion, eventoController.prototype.crearEvento);
 rutaEventos.get('/traer', autenticacion, eventoController.prototype.traerEventos);
 rutaEventos.post('/actualizar', autenticacion, eventoController.prototype.actualizarEvento);
+rutaEventos.post('/eliminar', autenticacion, eventoController.prototype.eliminarEvento);

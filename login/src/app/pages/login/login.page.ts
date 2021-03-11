@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertServiceService } from 'src/app/services/alert-service.service';
 import { UsuariosService } from '../../services/usuarios.service';
 
 @Component({
@@ -10,11 +11,11 @@ import { UsuariosService } from '../../services/usuarios.service';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private usuariosService: UsuariosService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private usuariosService: UsuariosService, private router: Router, private alertService: AlertServiceService) { }
   public usuario: string;
   public password: string;
   public loginForm: FormGroup;
-  
+
   ngOnInit() {
     this.createForm();
     this.router.navigate(["/inicio"]);
@@ -23,12 +24,15 @@ export class LoginPage implements OnInit {
   async login() {
     if (this.loginForm.invalid) return
     const datos = this.loginForm.value;
-    console.log(datos);
     const resultado = await this.usuariosService.login(datos);
+
     if (resultado.status == "ok") {
       this.loginForm.reset();
+      this.alertService.presentAlert("Loggeado con éxito")
       this.router.navigate(["/inicio"]);
     }
+
+
   }
 
   get nombre() {

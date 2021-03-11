@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar color="dark">
-    <ion-title>Inicio</ion-title>
-    <ion-icon name="exit" color="danger" (click)="logout()" style="font-size: 25px;" slot="end">
+    <ion-icon name="exit" color="danger" class="ion-margin" (click)="logout()" style="font-size: 25px;" slot="start">
     </ion-icon>
+    <ion-title>Inicio</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,28 +11,58 @@
     <div>
       <ion-card *ngFor="let event of listaEventos; index as i">
         <ion-card-header>
-          <ion-icon style="float: right;" name="ellipsis-vertical"  *ngIf="event.idUsuario === user._id" (click)="misEventos(event)"></ion-icon>
-          
-          <ion-icon style="float: right;" name="ellipsis-vertical"  *ngIf="event.idUsuario !== user._id" (click)="opcionesEvento(event)"></ion-icon>
-          <ion-card-title>{{event.nombre}}</ion-card-title>
+          <ion-button fill="clear" (click)="misEventos(event)" *ngIf="event.idUsuario === user._id"
+            style="float: right;" color="none" display="none">
+            <ion-icon name="ellipsis-vertical" color="dark"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" (click)="opcionesEvento(event)" *ngIf="event.idUsuario !== user._id"
+            style="float: right;" color="none" display="none">
+            <ion-icon name="ellipsis-vertical" color="dark"></ion-icon>
+          </ion-button>
+
+          <ion-card-title style="width: 85%;">{{event.nombre}}</ion-card-title>
           <ion-card-subtitle>{{event.fecha | date:'longDate'}}</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
-          <h2 *ngIf="event.asistentes.length!=4">Plazas disponibles: <span>{{4-event.asistentes.length}}</span></h2>
-          <h2 style="color: red;" *ngIf="event.asistentes.length==4">Aforo completo</h2>
-          <hr>
+          <ion-item *ngIf="event.asistentes.length!=4" class="ion-no-padding" lines="none">
+            <ion-icon color="success" name="person-outline"></ion-icon>
+            &nbsp;
+            <ion-label>{{event.asistentes.length}}/4</ion-label>
+            <div style="margin-top: 10px;" *ngFor="let asistente of event.asistentes; index as j">
+              <ion-badge *ngIf="event.asistentes[j]==user.nombre">Estás apuntado</ion-badge>
+            </div>
+          </ion-item>
+
+          <ion-item *ngIf="event.asistentes.length==4" class="ion-no-padding" lines="none">
+            <ion-icon color="danger" name="person-outline"></ion-icon>
+            &nbsp;
+            <ion-label color="danger">{{event.asistentes.length}}/4</ion-label>
+            <div style="margin-top: 10px;" *ngFor="let asistente of event.asistentes; index as j">
+              <ion-badge *ngIf="event.asistentes[j]==user.nombre">Estás apuntado</ion-badge>
+            </div>
+          </ion-item>
         </ion-card-content>
       </ion-card>
     </div>
-  
-  
-  
-  
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button color="primary" (click)="crearEvento()">
-        <ion-icon name="add"></ion-icon>
+
+
+    <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+      <ion-fab-button color="dark">
+        <ion-icon md="caret-back" ios="chevron-right-circle-outline"></ion-icon>
       </ion-fab-button>
+      <ion-fab-list side="start">
+        <ion-fab-button (click)="crearEvento()">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button (click)="filtrarEventos()" color="light">
+          <ion-icon name="funnel">
+          </ion-icon>
+        </ion-fab-button>
+        <ion-fab-button (click)="traerEventos()" color="light">
+          <ion-icon name="reload">
+          </ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
     </ion-fab>
-  
   </ion-content>
 </ion-content>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActionSheetController, AlertController, ToastController } from '@ionic/angular';
 import { Evento, Usuario } from 'src/app/interfaces/RespuestaPost';
+import { AlertServiceService } from 'src/app/services/alert-service.service';
 import { EventoService } from 'src/app/services/evento.service';
 import { UsuariosService } from '../../services/usuarios.service';
 
@@ -15,7 +16,7 @@ const dateFormat = { year: 'numeric', month: 'numeric', day: 'numeric' }
 
 export class InicioPage {
 
-  constructor(private usuarioService: UsuariosService, private router: Router, private eventoService: EventoService, private toastController: ToastController, private alertController: AlertController, private actionSheetController: ActionSheetController) { }
+  constructor(private alertService: AlertServiceService, private usuarioService: UsuariosService, private router: Router, private eventoService: EventoService, private toastController: ToastController, private alertController: AlertController, private actionSheetController: ActionSheetController) { }
 
   public data;
   public listaEventos: Evento[] = [];
@@ -32,6 +33,11 @@ export class InicioPage {
 
   traerUsuario() {
     this.user = JSON.parse(localStorage.getItem("usuario"));
+  }
+
+  filtrarEventos() {
+    this.listaEventos = this.listaEventos.filter(event => event.idUsuario === this.user._id)
+    this.alertService.presentAlert("Ahora sólo aparecen tus eventos");
   }
 
   traerEventos() {
@@ -105,10 +111,9 @@ export class InicioPage {
 
   async editarEvento(event: Evento) {
     const tempEvent: Evento = JSON.parse(JSON.stringify(event))
-
     const alert = await this.alertController.create({
       backdropDismiss: false,
-      header: 'Crear nuevo Evento',
+      header: tempEvent.nombre,
       inputs: [
         {
           name: 'nombre',
@@ -119,7 +124,8 @@ export class InicioPage {
         {
           name: 'fecha',
           type: 'date',
-          min: new Date().toLocaleDateString('fr-CA', dateFormat)
+          min: new Date().toLocaleDateString('fr-CA', dateFormat),
+          value: new Date(tempEvent.fecha).toLocaleDateString("fr-CA",{ year: 'numeric', month: '2-digit', day: '2-digit' })
         },
       ],
       buttons: [
@@ -154,14 +160,11 @@ export class InicioPage {
         tempEvent.asistentes.push(this.user.nombre);
         this.actualizarEventos(tempEvent);
         this.presentToast("Te has unido con éxito");
+      } else if (index > -1) {
+        this.presentToast("Ya estabas apuntado a este evento");
       };
     } else {
-      const index = tempEvent.asistentes.findIndex(name => name === this.user.nombre);
-      if (index > -1) {
-        this.presentToast("Ya estabas apuntado a este evento");
-      } else {
-        this.presentToast("El evento está lleno");
-      }
+      this.presentToast("El evento está lleno");
     }
   };
 
@@ -233,6 +236,13 @@ export class InicioPage {
     });
     await actionSheet.present();
   }
+
+  eliminarEvento(event: Evento) {
+    this.eventoService.eliminarEvento(event);
+    this.alertService.presentAlert("Borrado con éxito");
+    this.traerEventos();
+  }
+
   async misEventos(event: Evento) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Opciones',
@@ -242,7 +252,14 @@ export class InicioPage {
           text: 'Editar',
           icon: 'create',
           handler: () => {
-            this.editarEvento(event)
+            this.editarEvento(event);
+          }
+        },
+        {
+          text: 'Eliminar',
+          icon: 'trash',
+          handler: () => {
+            this.eliminarEvento(event);
           }
         },
         {
@@ -254,5 +271,5 @@ export class InicioPage {
     });
     await actionSheet.present();
   }
-  
+
 }

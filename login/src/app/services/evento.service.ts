@@ -12,19 +12,25 @@ export class EventoService {
 
   crearEvento(event: Evento): Promise<RespuestaPost> {
     return new Promise<RespuestaPost>(resolve => {
-      this.httpClient.post<RespuestaPost>(environment.urlUsuario+"evento/crear", event).subscribe(resp => resolve(resp))
+      this.httpClient.post<RespuestaPost>(environment.urlUsuario + "evento/crear", event).subscribe(resp => resolve(resp))
     })
   }
 
   traerEventos(): Promise<RespuestaPost> {
     return new Promise<RespuestaPost>(resolve => {
-      this.httpClient.get<RespuestaPost>(environment.urlUsuario+"evento/traer").subscribe(resp => resolve(resp))
+      this.httpClient.get<RespuestaPost>(environment.urlUsuario + "evento/traer").subscribe(resp => resolve(resp))
     })
   }
 
   actualizarEventos(event: Evento): Promise<RespuestaPost> {
     return new Promise<RespuestaPost>(resolve => {
-      this.httpClient.post<RespuestaPost>(environment.urlUsuario+"evento/actualizar", event).subscribe(resp => resolve(resp))
+      this.httpClient.post<RespuestaPost>(environment.urlUsuario + "evento/actualizar", event).subscribe(resp => resolve(resp))
+    })
+  }
+
+  eliminarEvento(event: Evento): Promise<RespuestaPost> {
+    return new Promise<RespuestaPost>(resolve => {
+      this.httpClient.post<RespuestaPost>(environment.urlUsuario + "evento/eliminar", event).subscribe(resp => resolve(resp))
     })
   }
 

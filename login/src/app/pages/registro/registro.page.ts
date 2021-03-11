@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AlertServiceService } from 'src/app/services/alert-service.service';
 import { UsuariosService } from '../../services/usuarios.service';
 
 @Component({
@@ -9,7 +11,7 @@ import { UsuariosService } from '../../services/usuarios.service';
 })
 export class RegistroPage implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private usuarioService: UsuariosService) { }
+  constructor(private formBuilder: FormBuilder, private usuarioService: UsuariosService, private router:Router,private alertService:AlertServiceService) { }
 
   public registerForm: FormGroup;
 
@@ -21,9 +23,10 @@ export class RegistroPage implements OnInit {
     if (this.registerForm.invalid) return
     const data = this.registerForm.value;
 
-    console.log(data);
-    const resultado = await this.usuarioService.registro(data);
-    console.log(resultado);
+    
+    await this.usuarioService.registro(data);
+    this.alertService.presentAlert("Registrado con éxito");
+    this.router.navigate(["/login"]);
   }
 
   get nombre() {

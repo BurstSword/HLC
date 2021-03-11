@@ -63,6 +63,21 @@ var eventoController = /** @class */ (function () {
         });
     };
     ;
+    eventoController.prototype.eliminarEvento = function (req, resp) {
+        var params = req.body;
+        evento_modelo_1.Evento.deleteOne({ "_id": params._id }).then(function () {
+            resp.status(200).send({
+                status: "ok",
+                mensaje: 'Evento eliminado'
+            });
+        }).catch(function (err) {
+            resp.status(500).send({
+                status: "error",
+                mensaje: err
+            });
+        });
+    };
+    ;
     eventoController.prototype.crearEvento = function (req, resp) {
         var params = req.body;
         var event = new evento_modelo_1.Evento();
