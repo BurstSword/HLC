@@ -45,18 +45,17 @@ export class LoginPage implements OnInit {
   createForm() {
     this.loginForm = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.maxLength(255)]],
-      pwd: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(255)]]
+      pwd: ['', [Validators.required, Validators.minLength(8)]]
     })
   }
 
   validationMessages = {
     'nombre': [
-      { type: 'maxlength', message: 'Max length of 255 characters' },
+      { type: 'required', message: 'Nombre obligatorio' },
     ],
     'pwd': [
-      { type: 'required', message: 'Password required' },
-      { type: 'minlength', message: 'Min length of 8 characters' },
-      { type: 'maxlength', message: 'Max length of 255 characters' }
+      { type: 'required', message: 'Contraseña obligatoria' },
+      { type: 'minlength', message: 'Min length of 8 characters' }
     ]
   }
 }

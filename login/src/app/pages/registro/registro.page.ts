@@ -44,8 +44,8 @@ export class RegistroPage implements OnInit {
 
   createForm() {
     this.registerForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email, Validators.maxLength(255)]],
-      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(255)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       edad: ['', [Validators.required,  Validators.maxLength(2)]],
       nombre: ['', [Validators.required]]
     })
@@ -53,24 +53,19 @@ export class RegistroPage implements OnInit {
 
   validationMessages = {
     'email': [
-      { type: 'required', message: 'Mail required' },
-      { type: 'maxlength', message: 'Max length of 255 characters' },
-      { type: 'email', message: 'Valid email format' },
+      { type: 'required', message: 'Email obligatorio' },
+      { type: 'email', message: 'Formato inválido' },
     ],
     'password': [
-      { type: 'required', message: 'Password required' },
-      { type: 'minlength', message: 'Min length of 8 characters' },
-      { type: 'maxlength', message: 'Max length of 255 characters' }
+      { type: 'required', message: 'Contraseña obligatoria' },
+      { type: 'minlength', message: 'Mínimo 8 caracteres' }
     ],
     'nombre': [
-      { type: 'required', message: 'Password required' },
-      { type: 'minlength', message: 'Min length of 8 characters' },
-      { type: 'maxlength', message: 'Max length of 255 characters' }
+      { type: 'required', message: 'Nombre obligatorio' },
     ],
     'edad': [
-      { type: 'required', message: 'Password required' },
-      { type: 'minlength', message: 'Min length of 8 characters' },
-      { type: 'maxlength', message: 'Max length of 255 characters' }
+      { type: 'required', message: 'Edad obligatoria' },
+      { type: 'maxlength', message: 'Máximo 2 caracteres de edad' }
     ]
   }
 }
